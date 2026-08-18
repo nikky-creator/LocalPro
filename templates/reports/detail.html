@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load lp_extras i18n %}
+{% block title %}Report Status — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<section class="page-header-band">
+  <div class="container">
+    <nav class="breadcrumb-lp small mb-2"><a href="{% url 'bookings:detail' booking.pk %}">Booking #{{ booking.pk }}</a> <span class="divider-dot mx-1">/</span> <span class="active">Report Status</span></nav>
+    <h1 class="h2 mb-0">Your Report</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="lp-card p-4 p-md-5">
+          <div class="d-flex justify-content-between align-items-start mb-4 pb-4 border-bottom">
+            <div>
+              <div class="small text-muted-2">Reported on {{ report.created_at|date:"M d, Y" }}</div>
+              <h2 class="h5 mb-0">{{ report.get_reason_display }}</h2>
+            </div>
+            <span class="status-pill status-{{ report.status_color }}">{{ report.get_status_display }}</span>
+          </div>
+          <p class="text-muted-2">{{ report.description }}</p>
+
+          {% if report.status == 'resolved' or report.status == 'dismissed' %}
+            {% if report.admin_notes %}
+            <div class="alert alert-info small mt-3"><strong>Team response:</strong> {{ report.admin_notes }}</div>
+            {% endif %}
+          {% else %}
+            <div class="alert alert-warning small mt-3"><i class="fa-solid fa-clock me-1"></i> Our team is reviewing this report.</div>
+          {% endif %}
+
+          <a href="{% url 'bookings:detail' booking.pk %}" class="btn btn-lp-outline w-100 mt-3">Back to Booking</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

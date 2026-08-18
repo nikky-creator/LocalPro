@@ -1,0 +1,681 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-15 15:56+0530\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: accounts/models.py:22 templates/partials/navbar.html:54
+msgid "Customer"
+msgstr "ग्राहक"
+
+#: accounts/models.py:23
+msgid "Service Provider"
+msgstr "सेवा प्रदाता"
+
+#: bookings/models.py:14 payments/models.py:32
+msgid "Pending"
+msgstr "लंबित"
+
+#: bookings/models.py:15
+msgid "Accepted"
+msgstr "स्वीकृत"
+
+#: bookings/models.py:16
+msgid "Rejected"
+msgstr "अस्वीकृत"
+
+#: bookings/models.py:17
+msgid "Completed"
+msgstr "पूर्ण"
+
+#: bookings/models.py:18
+msgid "Cancelled"
+msgstr "रद्द"
+
+#: payments/models.py:23
+msgid "Credit / Debit Card"
+msgstr "क्रेडिट / डेबिट कार्ड"
+
+#: payments/models.py:24
+msgid "UPI"
+msgstr "यूपीआई"
+
+#: payments/models.py:25
+msgid "Net Banking"
+msgstr "नेट बैंकिंग"
+
+#: payments/models.py:33
+msgid "Success"
+msgstr "सफल"
+
+#: payments/models.py:34
+msgid "Failed"
+msgstr "असफल"
+
+#: reports/models.py:14
+msgid "Provider did not show up"
+msgstr "प्रदाता नहीं आया"
+
+#: reports/models.py:15
+msgid "Poor quality of work"
+msgstr "काम की खराब गुणवत्ता"
+
+#: reports/models.py:16
+msgid "Overcharged / price dispute"
+msgstr "अधिक शुल्क / मूल्य विवाद"
+
+#: reports/models.py:17
+msgid "Unprofessional behavior"
+msgstr "अव्यवसायिक व्यवहार"
+
+#: reports/models.py:18
+msgid "Property damage"
+msgstr "संपत्ति क्षति"
+
+#: reports/models.py:19
+msgid "Other"
+msgstr "अन्य"
+
+#: reports/models.py:27
+msgid "Open"
+msgstr "खुला"
+
+#: reports/models.py:28
+msgid "Under Review"
+msgstr "समीक्षा में"
+
+#: reports/models.py:29
+msgid "Resolved"
+msgstr "हल हो गया"
+
+#: reports/models.py:30
+msgid "Dismissed"
+msgstr "खारिज"
+
+#: templates/accounts/customer_dashboard.html:11
+msgid "Customer Dashboard"
+msgstr "ग्राहक डैशबोर्ड"
+
+#: templates/accounts/customer_dashboard.html:12
+#: templates/accounts/provider_dashboard.html:25
+msgid "Welcome back,"
+msgstr "वापसी पर स्वागत है,"
+
+#: templates/accounts/customer_dashboard.html:16
+#: templates/accounts/customer_dashboard.html:90 templates/core/about.html:23
+#: templates/partials/navbar.html:61
+msgid "Find a Provider"
+msgstr "प्रदाता खोजें"
+
+#: templates/accounts/customer_dashboard.html:56
+msgid "Recent Bookings"
+msgstr "हाल की बुकिंग"
+
+#: templates/accounts/customer_dashboard.html:57
+msgid "View all"
+msgstr "सभी देखें"
+
+#: templates/accounts/customer_dashboard.html:74
+#: templates/accounts/provider_dashboard.html:100
+#: templates/bookings/history.html:44 templates/reports/create.html:34
+msgid "Details"
+msgstr "विवरण"
+
+#: templates/accounts/customer_dashboard.html:88
+#: templates/accounts/provider_dashboard.html:154
+msgid "Quick Actions"
+msgstr "त्वरित कार्य"
+
+#: templates/accounts/customer_dashboard.html:91
+#: templates/bookings/detail.html:9 templates/bookings/history.html:3
+#: templates/bookings/history.html:8 templates/bookings/history.html:9
+#: templates/partials/navbar.html:59
+msgid "Booking History"
+msgstr "बुकिंग इतिहास"
+
+#: templates/accounts/customer_dashboard.html:92
+#: templates/accounts/profile.html:38
+#: templates/accounts/provider_dashboard.html:157
+msgid "Edit Profile"
+msgstr "प्रोफ़ाइल संपादित करें"
+
+#: templates/accounts/customer_register.html:29
+msgid "Create your account"
+msgstr "अपना खाता बनाएं"
+
+#: templates/accounts/customer_register.html:36
+#: templates/accounts/profile.html:43
+#: templates/accounts/provider_register.html:36
+msgid "First Name"
+msgstr "पहला नाम"
+
+#: templates/accounts/customer_register.html:41
+#: templates/accounts/profile.html:48
+#: templates/accounts/provider_register.html:41
+msgid "Last Name"
+msgstr "अंतिम नाम"
+
+#: templates/accounts/customer_register.html:51
+#: templates/accounts/profile.html:53
+#: templates/accounts/provider_register.html:51
+msgid "Email"
+msgstr "ईमेल"
+
+#: templates/accounts/customer_register.html:56
+#: templates/accounts/provider_register.html:56
+msgid "Phone Number"
+msgstr "फ़ोन नंबर"
+
+#: templates/accounts/customer_register.html:61
+#: templates/accounts/profile.html:63 templates/services/provider_list.html:40
+#: templates/services/provider_profile_form.html:65
+msgid "City"
+msgstr "शहर"
+
+#: templates/accounts/customer_register.html:75
+#: templates/accounts/provider_register.html:66
+msgid "Confirm Password"
+msgstr "पासवर्ड की पुष्टि करें"
+
+#: templates/accounts/customer_register.html:82
+msgid "Create Customer Account"
+msgstr "ग्राहक खाता बनाएं"
+
+#: templates/accounts/customer_register.html:86
+#: templates/accounts/provider_register.html:77
+#: templates/accounts/register_choice.html:36
+msgid "Already have an account?"
+msgstr "पहले से खाता है?"
+
+#: templates/accounts/customer_register.html:86
+#: templates/accounts/provider_register.html:77
+#: templates/accounts/register_choice.html:36
+msgid "Log in"
+msgstr "लॉग इन करें"
+
+#: templates/accounts/login.html:3 templates/accounts/login.html:43
+#: templates/partials/navbar.html:77
+msgid "Log In"
+msgstr "लॉग इन"
+
+#: templates/accounts/login.html:13
+#, python-format
+msgid "Welcome back to %(SITE_NAME)s"
+msgstr "%(SITE_NAME)s में वापसी पर स्वागत है"
+
+#: templates/accounts/login.html:14
+msgid ""
+"Log in to manage your bookings, track requests, or keep your service listing"
+" up to date."
+msgstr ""
+"अपनी बुकिंग प्रबंधित करने, अनुरोधों को ट्रैक करने, या अपनी सेवा लिस्टिंग को "
+"अद्यतन रखने के लिए लॉग इन करें।"
+
+#: templates/accounts/login.html:16
+msgid "Fast, secure access to your dashboard"
+msgstr "आपके डैशबोर्ड तक तेज़, सुरक्षित पहुंच"
+
+#: templates/accounts/login.html:17
+msgid "Pick up right where you left off"
+msgstr "जहां आपने छोड़ा था वहीं से शुरू करें"
+
+#: templates/accounts/login.html:23
+msgid "Log in to your account"
+msgstr "अपने खाते में लॉग इन करें"
+
+#: templates/accounts/login.html:24
+msgid "New here?"
+msgstr "यहाँ नए हैं?"
+
+#: templates/accounts/login.html:24
+msgid "Create an account"
+msgstr "एक खाता बनाएं"
+
+#: templates/accounts/login.html:33
+msgid "Username"
+msgstr "उपयोगकर्ता नाम"
+
+#: templates/accounts/login.html:38
+msgid "Password"
+msgstr "पासवर्ड"
+
+#: templates/accounts/login.html:47
+msgid "Don't have an account yet?"
+msgstr "अभी तक खाता नहीं है?"
+
+#: templates/accounts/login.html:48
+msgid "Sign up as Customer"
+msgstr "ग्राहक के रूप में साइन अप करें"
+
+#: templates/accounts/login.html:49
+msgid "Sign up as Provider"
+msgstr "प्रदाता के रूप में साइन अप करें"
+
+#: templates/accounts/profile.html:8 templates/bookings/detail.html:9
+#: templates/bookings/history.html:8 templates/partials/navbar.html:56
+#: templates/reports/my_reports.html:8
+#: templates/services/provider_profile_form.html:8
+msgid "Dashboard"
+msgstr "डैशबोर्ड"
+
+#: templates/accounts/profile.html:8 templates/accounts/profile.html:9
+#: templates/partials/navbar.html:57
+msgid "My Profile"
+msgstr "मेरी प्रोफ़ाइल"
+
+#: templates/accounts/provider_dashboard.html:3
+#: templates/accounts/provider_dashboard.html:24
+msgid "Provider Dashboard"
+msgstr "प्रदाता डैशबोर्ड"
+
+#: templates/accounts/provider_dashboard.html:73
+msgid "Booking Requests"
+msgstr "बुकिंग अनुरोध"
+
+#: templates/accounts/provider_dashboard.html:97
+msgid "Mark Complete"
+msgstr "पूर्ण के रूप में चिह्नित करें"
+
+#: templates/accounts/provider_dashboard.html:122
+#: templates/bookings/detail.html:124
+msgid "Reject Booking"
+msgstr "बुकिंग अस्वीकार करें"
+
+#: templates/accounts/provider_dashboard.html:140
+msgid "Recent Reviews"
+msgstr "हाल की समीक्षाएं"
+
+#: templates/accounts/provider_register.html:73
+msgid "Create Provider Account"
+msgstr "प्रदाता खाता बनाएं"
+
+#: templates/accounts/register_choice.html:19
+msgid "I need a service"
+msgstr "मुझे एक सेवा चाहिए"
+
+#: templates/accounts/register_choice.html:21
+msgid "Continue as Customer"
+msgstr "ग्राहक के रूप में जारी रखें"
+
+#: templates/accounts/register_choice.html:29
+msgid "I offer a service"
+msgstr "मैं एक सेवा प्रदान करता हूं"
+
+#: templates/accounts/register_choice.html:31
+msgid "Continue as Provider"
+msgstr "प्रदाता के रूप में जारी रखें"
+
+#: templates/bookings/create.html:38
+msgid "Booking Details"
+msgstr "बुकिंग विवरण"
+
+#: templates/bookings/create.html:43
+msgid "Service Date"
+msgstr "सेवा तिथि"
+
+#: templates/bookings/create.html:48
+msgid "Service Time"
+msgstr "सेवा समय"
+
+#: templates/bookings/create.html:53
+msgid "Service Address"
+msgstr "सेवा पता"
+
+#: templates/bookings/create.html:63
+msgid "Send Booking Request"
+msgstr "बुकिंग अनुरोध भेजें"
+
+#: templates/bookings/detail.html:62
+msgid "Actions"
+msgstr "कार्रवाई"
+
+#: templates/bookings/detail.html:68 templates/payments/checkout.html:101
+msgid "Pay"
+msgstr "भुगतान करें"
+
+#: templates/bookings/detail.html:72
+msgid "Leave a Review"
+msgstr "समीक्षा छोड़ें"
+
+#: templates/core/contact.html:24
+msgid "Your Name"
+msgstr "आपका नाम"
+
+#: templates/core/contact.html:29
+msgid "Email Address"
+msgstr "ईमेल पता"
+
+#: templates/core/contact.html:34
+msgid "Subject"
+msgstr "विषय"
+
+#: templates/core/contact.html:39
+msgid "Message"
+msgstr "संदेश"
+
+#: templates/core/contact.html:44
+msgid "Send Message"
+msgstr "संदेश भेजें"
+
+#: templates/core/home.html:14
+msgid "Local Services, Made Easy"
+msgstr "स्थानीय सेवाएं, आसान बनी"
+
+#: templates/core/home.html:15
+msgid "Find trusted local pros for every job around your home"
+msgstr "अपने घर के हर काम के लिए भरोसेमंद स्थानीय पेशेवर खोजें"
+
+#: templates/core/home.html:16
+msgid ""
+"Electricians, plumbers, painters, cleaners, mechanics, tutors and more — "
+"verified, rated, and ready to book in minutes."
+msgstr ""
+"इलेक्ट्रीशियन, प्लंबर, पेंटर, क्लीनर, मैकेनिक, ट्यूटर और भी बहुत कुछ — "
+"सत्यापित, रेटेड, और मिनटों में बुक करने के लिए तैयार।"
+
+#: templates/core/home.html:21
+msgid "What do you need?"
+msgstr "आपको क्या चाहिए?"
+
+#: templates/core/home.html:22
+msgid "e.g. Electrician, AC repair..."
+msgstr "जैसे इलेक्ट्रीशियन, AC रिपेयर..."
+
+#: templates/core/home.html:25
+msgid "Your city"
+msgstr "आपका शहर"
+
+#: templates/core/home.html:26
+msgid "e.g. Vijayawada"
+msgstr "जैसे विजयवाड़ा"
+
+#: templates/core/home.html:30 templates/services/provider_list.html:25
+msgid "Search"
+msgstr "खोजें"
+
+#: templates/core/home.html:68
+msgid "Browse by category"
+msgstr "श्रेणी के अनुसार ब्राउज़ करें"
+
+#: templates/core/home.html:69
+msgid "What can we help you fix today?"
+msgstr "आज हम आपकी क्या मदद कर सकते हैं?"
+
+#: templates/core/home.html:70
+msgid ""
+"Every category is packed with verified, background-checked local "
+"professionals."
+msgstr "हर श्रेणी सत्यापित, पृष्ठभूमि-जांच किए गए स्थानीय पेशेवरों से भरी है।"
+
+#: templates/core/home.html:79
+#, python-format
+msgid "%(counter)s provider"
+msgid_plural "%(counter)s providers"
+msgstr[0] "%(counter)s प्रदाता"
+msgstr[1] "%(counter)s प्रदाता"
+
+#: templates/core/home.html:84
+msgid "Categories will appear here once added by an admin."
+msgstr "एडमिन द्वारा जोड़े जाने पर श्रेणियां यहां दिखाई देंगी।"
+
+#: templates/core/home.html:88
+msgid "View all categories"
+msgstr "सभी श्रेणियां देखें"
+
+#: templates/core/home.html:98
+msgid "Top rated"
+msgstr "शीर्ष रेटेड"
+
+#: templates/core/home.html:99
+msgid "Featured local providers"
+msgstr "विशेष स्थानीय प्रदाता"
+
+#: templates/core/home.html:101
+msgid "Browse all providers"
+msgstr "सभी प्रदाता ब्राउज़ करें"
+
+#: templates/core/home.html:110
+msgid "No providers have joined yet — be the first!"
+msgstr "अभी तक कोई प्रदाता शामिल नहीं हुआ है — पहले बनें!"
+
+#: templates/core/home.html:121
+msgid "Simple process"
+msgstr "सरल प्रक्रिया"
+
+#: templates/core/home.html:122
+msgid "Find. Book. Get it done."
+msgstr "खोजें। बुक करें। पूरा करवाएं।"
+
+#: templates/core/home.html:123
+msgid "From search to a finished job in three easy steps."
+msgstr "खोज से पूर्ण कार्य तक, तीन आसान चरणों में।"
+
+#: templates/core/home.html:129
+msgid "Find"
+msgstr "खोजें"
+
+#: templates/core/home.html:130
+msgid ""
+"Search by service, location, price or rating to discover the right local "
+"professional."
+msgstr ""
+"सही स्थानीय पेशेवर खोजने के लिए सेवा, स्थान, मूल्य या रेटिंग के अनुसार "
+"खोजें।"
+
+#: templates/core/home.html:135
+msgid "Book"
+msgstr "बुक करें"
+
+#: templates/core/home.html:136
+msgid ""
+"Pick a date and time that works for you and send a booking request in "
+"seconds."
+msgstr ""
+"अपने लिए उपयुक्त तारीख और समय चुनें और सेकंडों में बुकिंग अनुरोध भेजें।"
+
+#: templates/core/home.html:140
+msgid "Get It Done"
+msgstr "पूरा करवाएं"
+
+#: templates/core/home.html:141
+msgid ""
+"Your provider confirms, does the job, and you leave a review to help your "
+"community."
+msgstr ""
+"आपका प्रदाता पुष्टि करता है, काम करता है, और आप अपने समुदाय की मदद के लिए "
+"समीक्षा छोड़ते हैं।"
+
+#: templates/core/home.html:153
+msgid "Verified Providers"
+msgstr "सत्यापित प्रदाता"
+
+#: templates/core/home.html:157
+msgid "Happy Customers"
+msgstr "खुश ग्राहक"
+
+#: templates/core/home.html:161
+msgid "Jobs Completed"
+msgstr "पूर्ण किए गए काम"
+
+#: templates/core/home.html:165
+msgid "Service Categories"
+msgstr "सेवा श्रेणियां"
+
+#: templates/core/home.html:176
+msgid "Testimonials"
+msgstr "प्रशंसापत्र"
+
+#: templates/core/home.html:177
+msgid "Loved by customers &amp; providers alike"
+msgstr "ग्राहकों और प्रदाताओं दोनों द्वारा पसंद किया गया"
+
+#: templates/core/home.html:207
+msgid "Are you a skilled professional?"
+msgstr "क्या आप एक कुशल पेशेवर हैं?"
+
+#: templates/core/home.html:208
+#, python-format
+msgid ""
+"Join %(SITE_NAME)s to reach more local customers, manage bookings "
+"effortlessly, and grow your business."
+msgstr ""
+"अधिक स्थानीय ग्राहकों तक पहुंचने, आसानी से बुकिंग प्रबंधित करने और अपना "
+"व्यवसाय बढ़ाने के लिए %(SITE_NAME)s से जुड़ें।"
+
+#: templates/core/home.html:211
+msgid "Join as a Provider"
+msgstr "प्रदाता के रूप में जुड़ें"
+
+#: templates/partials/footer.html:10
+msgid ""
+"We connect you with verified electricians, plumbers, painters, cleaners, "
+"mechanics, tutors and more — right in your neighbourhood."
+msgstr ""
+"हम आपको आपके पड़ोस में सत्यापित इलेक्ट्रीशियन, प्लंबर, पेंटर, क्लीनर, "
+"मैकेनिक, ट्यूटर और भी बहुत कुछ से जोड़ते हैं।"
+
+#: templates/partials/footer.html:19
+msgid "Quick Links"
+msgstr "त्वरित लिंक"
+
+#: templates/partials/footer.html:21 templates/partials/navbar.html:13
+msgid "Home"
+msgstr "होम"
+
+#: templates/partials/footer.html:22
+msgid "Find Providers"
+msgstr "प्रदाता खोजें"
+
+#: templates/partials/footer.html:23
+msgid "About Us"
+msgstr "हमारे बारे में"
+
+#: templates/partials/footer.html:24 templates/partials/navbar.html:17
+msgid "Contact"
+msgstr "संपर्क करें"
+
+#: templates/partials/footer.html:28
+msgid "Popular Categories"
+msgstr "लोकप्रिय श्रेणियां"
+
+#: templates/partials/footer.html:36
+msgid "Get In Touch"
+msgstr "संपर्क में रहें"
+
+#: templates/partials/footer.html:43
+msgid "Become a Provider"
+msgstr "प्रदाता बनें"
+
+#: templates/partials/footer.html:48
+msgid "All rights reserved."
+msgstr "सर्वाधिकार सुरक्षित।"
+
+#: templates/partials/footer.html:49
+msgid "Built with Django"
+msgstr "Django के साथ निर्मित"
+
+#: templates/partials/footer.html:49
+msgid "Made for local communities"
+msgstr "स्थानीय समुदायों के लिए बनाया गया"
+
+#: templates/partials/navbar.html:8
+msgid "Toggle navigation"
+msgstr "नेविगेशन टॉगल करें"
+
+#: templates/partials/navbar.html:14
+msgid "Services"
+msgstr "सेवाएं"
+
+#: templates/partials/navbar.html:15
+msgid "Providers"
+msgstr "प्रदाता"
+
+#: templates/partials/navbar.html:16
+msgid "About"
+msgstr "बारे में"
+
+#: templates/partials/navbar.html:23
+msgid "Choose language"
+msgstr "भाषा चुनें"
+
+#: templates/partials/navbar.html:31
+msgid "Toggle dark mode"
+msgstr "डार्क मोड टॉगल करें"
+
+#: templates/partials/navbar.html:37
+msgid "Bookings"
+msgstr "बुकिंग"
+
+#: templates/partials/navbar.html:41
+msgid "Requests"
+msgstr "अनुरोध"
+
+#: templates/partials/navbar.html:54
+msgid "Signed in as"
+msgstr "इस रूप में साइन इन किया"
+
+#: templates/partials/navbar.html:54
+msgid "Provider"
+msgstr "प्रदाता"
+
+#: templates/partials/navbar.html:60
+msgid "My Reports"
+msgstr "मेरी रिपोर्ट"
+
+#: templates/partials/navbar.html:64
+msgid "My Listing"
+msgstr "मेरी लिस्टिंग"
+
+#: templates/partials/navbar.html:66
+msgid "Admin Panel"
+msgstr "एडमिन पैनल"
+
+#: templates/partials/navbar.html:71
+msgid "Logout"
+msgstr "लॉगआउट"
+
+#: templates/partials/navbar.html:78
+msgid "Get Started"
+msgstr "शुरू करें"
+
+#: templates/services/provider_detail.html:39
+msgid "Book Now"
+msgstr "अभी बुक करें"
+
+#: templates/services/provider_list.html:20
+msgid "Filters"
+msgstr "फ़िल्टर"
+
+#: templates/services/provider_list.html:21
+msgid "Clear all"
+msgstr "सभी साफ़ करें"
+
+#: templates/services/provider_list.html:30
+msgid "Category"
+msgstr "श्रेणी"
+
+#: templates/services/provider_list.html:50
+msgid "Minimum Rating"
+msgstr "न्यूनतम रेटिंग"
+
+#: templates/services/provider_list.html:65
+msgid "Apply Filters"
+msgstr "फ़िल्टर लागू करें"
+
+#: templates/services/provider_list.html:77
+msgid "Sort by"
+msgstr "इसके अनुसार क्रमबद्ध करें"

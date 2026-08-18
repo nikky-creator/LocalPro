@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Page Not Found — {{ SITE_NAME }}{% endblock %}
+{% block body_class %}has-dark-hero{% endblock %}
+
+{% block content %}
+<section class="hero" style="padding: 6rem 0;">
+  <div class="container text-center">
+    <div class="font-mono mb-3" style="font-size:5rem; font-weight:700; color:rgba(255,255,255,0.15); letter-spacing:0.05em;">404</div>
+    <h1 class="text-white mb-3">Looks like this page took a day off</h1>
+    <p class="lead mb-4 mx-auto" style="max-width:520px; color:rgba(255,255,255,0.75);">The page you're looking for doesn't exist or may have moved. Let's get you back on track.</p>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <a href="{% url 'core:home' %}" class="btn btn-lp-primary btn-lg"><i class="fa-solid fa-house me-2"></i>Back to Home</a>
+      <a href="{% url 'services:provider_list' %}" class="btn btn-lp-light btn-lg"><i class="fa-solid fa-magnifying-glass me-2"></i>Find a Provider</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

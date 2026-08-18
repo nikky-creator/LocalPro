@@ -1,0 +1,303 @@
+/* ==========================================================================
+   LocalPro Design System
+   Palette drawn from the brand mark: deep navy + service green, with
+   orange / steel-blue / gold as the four trade-accent colors.
+   Display: Space Grotesk · Body: Inter · Data/Utility: JetBrains Mono
+   ========================================================================== */
+
+:root {
+  /* Brand core */
+  --navy: #262422;
+  --navy-2: #302d2a;
+  --navy-3: #3b3733;
+  --green: #e07a2c;
+  --green-dark: #b85f1f;
+  --green-light: #fdece0;
+
+  /* Trade accents (from the badge icons) */
+  --orange: #c2410c;
+  --blue: #5c5148;
+  --gold: #f0a500;
+
+  /* Neutrals */
+  --paper: #f8f6f3;
+  --white: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f8f6f3;
+  --navbar-bg: rgba(255, 255, 255, 0.86);
+  --input-bg: rgba(255, 255, 255, 0.96);
+  --ink: #2a2724;
+  --muted: #6e655c;
+  --muted-2: #8f857a;
+  --border: #e9e2da;
+  --border-soft: #f1ece5;
+
+  /* Semantic */
+  --danger: #dc3545;
+  --success: #3c7a4a;
+  --warning: #f0a500;
+  --info: #5c5148;
+
+  /* Radii */
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --r-pill: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 10px rgba(38, 36, 34, 0.06);
+  --shadow-md: 0 10px 30px rgba(38, 36, 34, 0.10);
+  --shadow-lg: 0 24px 60px rgba(38, 36, 34, 0.20);
+  --shadow-green: 0 10px 28px rgba(224, 122, 44, 0.30);
+
+  /* Type */
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Dark theme — toggled via [data-bs-theme="dark"] on <html>, also activates
+   Bootstrap 5.3's own native dark-mode styling for modals/dropdowns/forms. */
+[data-bs-theme="dark"] {
+  --paper: #17140f;
+  --white: #201c17;
+  --surface: #201c17;
+  --surface-2: #17140f;
+  --navbar-bg: rgba(23, 20, 15, 0.86);
+  --input-bg: rgba(255, 255, 255, 0.06);
+  --ink: #f2ece4;
+  --muted: #b8ab9d;
+  --muted-2: #94867a;
+  --border: #3b332a;
+  --border-soft: #2b241d;
+  --green-light: #2e2013;
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+[data-bs-theme="dark"] body { background: var(--paper); }
+[data-bs-theme="dark"] .navbar-lp { background: var(--navbar-bg); border-bottom-color: var(--border-soft); }
+[data-bs-theme="dark"] .navbar-lp .nav-link { color: var(--ink); }
+[data-bs-theme="dark"] .navbar-lp .nav-link:hover { background: rgba(255, 255, 255, 0.06); }
+[data-bs-theme="dark"] .navbar-brand-text { color: var(--ink); }
+[data-bs-theme="dark"] body.has-dark-hero .navbar-lp:not(.is-solid) { background: transparent; }
+[data-bs-theme="dark"] .form-control, [data-bs-theme="dark"] .form-select {
+  background: var(--input-bg); border-color: var(--border); color: var(--ink);
+}
+[data-bs-theme="dark"] .form-control::placeholder { color: var(--muted-2); }
+[data-bs-theme="dark"] .theme-toggle .fa-sun { display: none; }
+[data-bs-theme="dark"] .theme-toggle .fa-moon { display: inline-block; }
+
+/* Headings and a few components render with the fixed brand --navy color,
+   which is a near-black and stays unreadable against the dark background
+   unless swapped for the theme-aware --ink color here. */
+[data-bs-theme="dark"] h1, [data-bs-theme="dark"] h2, [data-bs-theme="dark"] h3,
+[data-bs-theme="dark"] h4, [data-bs-theme="dark"] h5, [data-bs-theme="dark"] h6,
+[data-bs-theme="dark"] .font-display,
+[data-bs-theme="dark"] .btn-lp-outline,
+[data-bs-theme="dark"] .provider-card__price,
+[data-bs-theme="dark"] .testimonial-author .name,
+[data-bs-theme="dark"] label.form-label,
+[data-bs-theme="dark"] .dash-stat .num,
+[data-bs-theme="dark"] .breadcrumb-lp .active {
+  color: var(--ink);
+}
+[data-bs-theme="dark"] .btn-lp-outline:hover { color: var(--green); }
+.theme-toggle .fa-moon { display: none; }
+.theme-toggle .fa-sun { display: inline-block; }
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+}
+
+.font-mono { font-family: var(--font-mono); }
+
+a { text-decoration: none; color: var(--green); }
+a:hover { color: var(--green-dark); }
+
+::selection { background: var(--green); color: #fff; }
+
+/* Focus visibility (accessibility floor) */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, .btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  font-weight: 600;
+}
+.eyebrow.on-dark { color: #f3a463; }
+
+.text-muted-2 { color: var(--muted); }
+.section { padding: 5.5rem 0; }
+.section-sm { padding: 3rem 0; }
+@media (max-width: 767.98px) {
+  .section { padding: 3.25rem 0; }
+}
+
+.container-narrow { max-width: 760px; margin: 0 auto; }
+
+/* Buttons ------------------------------------------------------------- */
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  border-radius: var(--r-pill);
+  padding: 0.7rem 1.6rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, color 0.18s ease, border-color .18s ease;
+  border-width: 1.5px;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-lp-primary {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+  box-shadow: var(--shadow-green);
+}
+.btn-lp-primary:hover {
+  background: var(--green-dark);
+  border-color: var(--green-dark);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(224, 122, 44, 0.34);
+}
+
+.btn-lp-outline {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--navy);
+}
+.btn-lp-outline:hover {
+  border-color: var(--green);
+  color: var(--green);
+  transform: translateY(-2px);
+}
+
+.btn-lp-light {
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.5);
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+.btn-lp-light:hover {
+  background: rgba(255,255,255,0.24);
+  border-color: #fff;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btn-lp-danger {
+  background: transparent;
+  border-color: rgba(220,53,69,0.4);
+  color: var(--danger);
+}
+.btn-lp-danger:hover { background: var(--danger); border-color: var(--danger); color: #fff; }
+
+.btn-sm-pill { padding: 0.4rem 1rem; font-size: 0.85rem; }
+
+/* Glass surfaces -------------------------------------------------------- */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.glass-light {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Badges / status pills --------------------------------------------------*/
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.32rem 0.75rem;
+  border-radius: var(--r-pill);
+  border: 1px solid transparent;
+}
+.status-pill::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.status-pending { background: #fff6e0; color: #a3720a; border-color: #f4dfa4; }
+.status-accepted { background: #e7f1f7; color: #1d5273; border-color: #bfe0ef; }
+.status-completed { background: var(--green-light); color: var(--green-dark); border-color: #c7e6cc; }
+.status-rejected { background: #fdeceb; color: #a52734; border-color: #f6c6c9; }
+.status-cancelled { background: #f0f1f5; color: #565f75; border-color: #dfe2ec; }
+
+/* Category color chips used on cards / icons ---------------------------- */
+.chip-navy { background: var(--navy-2); }
+.chip-green { background: var(--green); }
+.chip-orange { background: var(--orange); }
+.chip-blue { background: var(--blue); }
+.chip-gold { background: var(--gold); }
+
+/* Cards ------------------------------------------------------------------*/
+.lp-card {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color .25s ease;
+}
+.lp-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+/* Scroll reveal ------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* Star ratings (display) ------------------------------------------------ */
+.stars-display { color: var(--gold); letter-spacing: 1px; font-size: 0.95rem; }
+.stars-display .far { color: #e2c98a; }
+
+/* Toast container -------------------------------------------------------*/
+.lp-toast-container { z-index: 1080; }

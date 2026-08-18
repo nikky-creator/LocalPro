@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}Customer Sign Up — {{ SITE_NAME }}{% endblock %}
+{% block body_class %}has-dark-hero{% endblock %}
+
+{% block content %}
+<section class="auth-wrap">
+  <div class="container" style="position:relative; z-index:1;">
+    <div class="auth-card row g-0 mx-auto" style="max-width:980px;">
+      <div class="col-lg-5 d-none d-lg-flex">
+        <div class="auth-card__side">
+          <span class="eyebrow on-dark mb-2">Customer Account</span>
+          <h2 class="text-white mb-3">Get things done around your home</h2>
+          <ul class="list-unstyled">
+            <li><i class="fa-solid fa-circle-check"></i> Search verified local providers instantly</li>
+            <li><i class="fa-solid fa-circle-check"></i> Compare ratings, reviews and pricing</li>
+            <li><i class="fa-solid fa-circle-check"></i> Track every booking in one dashboard</li>
+            <li><i class="fa-solid fa-circle-check"></i> Leave reviews after each completed job</li>
+          </ul>
+          <p class="small mt-4" style="color:rgba(255,255,255,0.6);">Looking to offer services instead? <a href="{% url 'accounts:provider_register' %}" style="color:#f3a463;">Register as a provider</a></p>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="auth-card__form">
+          <div class="role-toggle">
+            <span class="active"><i class="fa-solid fa-user me-1"></i> Customer</span>
+            <a href="{% url 'accounts:provider_register' %}"><i class="fa-solid fa-briefcase me-1"></i> Provider</a>
+          </div>
+          <h2 class="h3 mb-1">{% trans "Create your account" %}</h2>
+          <p class="text-muted-2 mb-4">Join {{ SITE_NAME }} and book your first service today.</p>
+
+          <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">{% trans "First Name" %}</label>
+                {{ form.first_name }}
+                {% for error in form.first_name.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">{% trans "Last Name" %}</label>
+                {{ form.last_name }}
+                {% for error in form.last_name.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-12">
+                <label class="form-label">Username</label>
+                {{ form.username }}
+                {% for error in form.username.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">{% trans "Email" %}</label>
+                {{ form.email }}
+                {% for error in form.email.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">{% trans "Phone Number" %}</label>
+                {{ form.phone }}
+                {% for error in form.phone.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">{% trans "City" %}</label>
+                {{ form.city }}
+                {% for error in form.city.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Address <span class="text-muted-2 fw-normal">(optional)</span></label>
+                {{ form.address }}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Password</label>
+                {{ form.password1 }}
+                {% for error in form.password1.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">{% trans "Confirm Password" %}</label>
+                {{ form.password2 }}
+                <div id="password-match-hint" class="form-text"></div>
+                {% for error in form.password2.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              {% if form.non_field_errors %}<div class="col-12"><div class="text-danger small">{{ form.non_field_errors }}</div></div>{% endif %}
+              <div class="col-12">
+                <button type="submit" class="btn btn-lp-primary btn-lg w-100 mt-2">{% trans "Create Customer Account" %}</button>
+              </div>
+            </div>
+          </form>
+          <p class="text-center text-muted-2 mt-4 mb-0">{% trans "Already have an account?" %} <a href="{% url 'accounts:login' %}">{% trans "Log in" %}</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

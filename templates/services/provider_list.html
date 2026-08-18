@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% load lp_extras i18n %}
+{% block title %}Find Local Providers — {{ SITE_NAME }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+  #nearbyMap { height: 320px; border-radius: var(--r-lg); z-index: 1; }
+  .distance-chip { display:inline-flex; align-items:center; gap:.3rem; font-size:.75rem; font-weight:600; color: var(--green); }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="page-header-band">
+  <div class="container">
+    <nav class="breadcrumb-lp small mb-2"><a href="{% url 'core:home' %}">Home</a> <span class="divider-dot mx-1">/</span> <span class="active">Providers</span></nav>
+    <h1 class="h2 mb-0">Find a Local Provider</h1>
+  </div>
+</section>
+
+<section class="section-sm pb-0">
+  <div class="container">
+    <div class="lp-card p-3 p-md-4">
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+        <div>
+          <h2 class="h6 mb-1"><i class="fa-solid fa-location-dot me-1" style="color:var(--green);"></i> {% trans "Providers Near You" %}</h2>
+          <p class="small text-muted-2 mb-0">
+            {% if user_location %}Showing distance from your current location.{% else %}Share your location to see providers sorted by distance.{% endif %}
+          </p>
+        </div>
+        <button type="button" id="useMyLocationBtn" class="btn btn-lp-primary btn-sm-pill btn-sm">
+          <i class="fa-solid fa-crosshairs me-1"></i> {% trans "Use My Location" %}
+        </button>
+      </div>
+      <div id="nearbyMap"></div>
+      <div id="locationStatus" class="small text-muted-2 mt-2"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-3">
+        <div class="filter-panel">
+          <form method="get" id="filterForm">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h2 class="h6 mb-0">{% trans "Filters" %}</h2>
+              {% if active_filters %}<a href="{% url 'services:provider_list' %}" class="small text-danger text-decoration-none">{% trans "Clear all" %}</a>{% endif %}
+            </div>
+            <input type="hidden" name="lat" id="filterLat" value="{% if user_location %}{{ user_location.0 }}{% endif %}">
+            <input type="hidden" name="lng" id="filterLng" value="{% if user_location %}{{ user_location.1 }}{% endif %}">
+
+            <div class="mb-3">
+              <label class="form-label">{% trans "Search" %}</label>
+              <input type="text" name="q" value="{{ q }}" class="form-control" placeholder="Name, category, area...">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">{% trans "Category" %}</label>
+              <select name="category" class="form-select" onchange="document.getElementById('filterForm').submit()">
+                <option value="">All Categories</option>
+                {% for cat in categories %}
+                  <option value="{{ cat.slug }}" {% if cat.slug == category_slug %}selected{% endif %}>{{ cat.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">{% trans "City" %}</label>
+              <select name="city" class="form-select" onchange="document.getElementById('filterForm').submit()">
+                <option value="">All Cities</option>
+                {% for c in cities %}
+                  <option value="{{ c }}" {% if c == city %}selected{% endif %}>{{ c }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">{% trans "Minimum Rating" %}</label>
+              <select name="rating" class="form-select" onchange="document.getElementById('filterForm').submit()">
+                <option value="">Any Rating</option>
+                <option value="4.5" {% if min_rating == '4.5' %}selected{% endif %}>4.5 &amp; up</option>
+                <option value="4" {% if min_rating == '4' %}selected{% endif %}>4.0 &amp; up</option>
+                <option value="3" {% if min_rating == '3' %}selected{% endif %}>3.0 &amp; up</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Max Price (&#8377;/hr)</label>
+              <input type="number" name="max_price" value="{{ max_price }}" class="form-control" placeholder="e.g. 1000" min="0">
+            </div>
+
+            <input type="hidden" name="sort" value="{{ sort }}">
+            <button type="submit" class="btn btn-lp-primary w-100"><i class="fa-solid fa-filter me-1"></i> {% trans "Apply Filters" %}</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-lg-9">
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+          <p class="mb-0 text-muted-2">{{ result_count }} provider{{ result_count|pluralize }} found</p>
+          <form method="get" class="d-flex align-items-center gap-2">
+            <input type="hidden" name="q" value="{{ q }}"><input type="hidden" name="category" value="{{ category_slug }}">
+            <input type="hidden" name="city" value="{{ city }}"><input type="hidden" name="rating" value="{{ min_rating }}">
+            <input type="hidden" name="max_price" value="{{ max_price }}">
+            <input type="hidden" name="lat" value="{% if user_location %}{{ user_location.0 }}{% endif %}">
+            <input type="hidden" name="lng" value="{% if user_location %}{{ user_location.1 }}{% endif %}">
+            <label class="small text-muted-2 mb-0">{% trans "Sort by" %}</label>
+            <select name="sort" class="form-select form-select-sm" style="width:auto;" onchange="this.form.submit()">
+              <option value="recommended" {% if sort == 'recommended' %}selected{% endif %}>Recommended</option>
+              {% if user_location %}<option value="nearby" {% if sort == 'nearby' %}selected{% endif %}>Nearest First</option>{% endif %}
+              <option value="rating" {% if sort == 'rating' %}selected{% endif %}>Highest Rated</option>
+              <option value="price_low" {% if sort == 'price_low' %}selected{% endif %}>Price: Low to High</option>
+              <option value="price_high" {% if sort == 'price_high' %}selected{% endif %}>Price: High to Low</option>
+              <option value="experience" {% if sort == 'experience' %}selected{% endif %}>Most Experienced</option>
+            </select>
+          </form>
+        </div>
+
+        {% if providers %}
+        <div class="row g-4">
+          {% for provider in providers %}
+          <div class="col-md-6 col-xl-4 reveal">
+            {% include 'partials/provider_card.html' %}
+          </div>
+          {% endfor %}
+        </div>
+        {% include 'partials/pagination.html' %}
+        {% else %}
+        <div class="empty-state">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <p>No providers match your filters right now.</p>
+          <a href="{% url 'services:provider_list' %}" class="btn btn-lp-outline btn-sm-pill">Clear Filters</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{{ map_points|json_script:"map-points-data" }}
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+(function () {
+  var points = JSON.parse(document.getElementById('map-points-data').textContent);
+  var userLat = {{ user_location.0|default:"null" }};
+  var userLng = {{ user_location.1|default:"null" }};
+
+  var centerLat = userLat, centerLng = userLng, zoom = 12;
+  if (centerLat === null) {
+    if (points.length) {
+      centerLat = points.reduce(function (s, p) { return s + p.lat; }, 0) / points.length;
+      centerLng = points.reduce(function (s, p) { return s + p.lng; }, 0) / points.length;
+      zoom = 11;
+    } else {
+      centerLat = 16.5062; centerLng = 80.6480; zoom = 8; // Andhra Pradesh default
+    }
+  }
+
+  var map = L.map('nearbyMap').setView([centerLat, centerLng], zoom);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 18
+  }).addTo(map);
+
+  var greenIcon = L.divIcon({
+    className: '', html: '<div style="background:var(--green);width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px var(--green);"></div>',
+    iconSize: [14, 14]
+  });
+
+  points.forEach(function (p) {
+    var popup = '<strong>' + p.name + '</strong><br>' + p.category + ' &middot; &#8377;' + p.price + '/hr';
+    if (p.distance_km !== null && p.distance_km !== undefined) {
+      popup += '<br><span style="color:#e07a2c;">' + p.distance_km + ' km away</span>';
+    }
+    popup += '<br><a href="' + p.url + '">View profile</a>';
+    L.marker([p.lat, p.lng], { icon: greenIcon }).addTo(map).bindPopup(popup);
+  });
+
+  if (userLat !== null) {
+    var userIcon = L.divIcon({
+      className: '', html: '<div style="background:var(--navy);width:16px;height:16px;border-radius:50%;border:3px solid #fff;"></div>',
+      iconSize: [16, 16]
+    });
+    L.marker([userLat, userLng], { icon: userIcon }).addTo(map).bindPopup('Your location').openPopup();
+  }
+
+  var statusEl = document.getElementById('locationStatus');
+  document.getElementById('useMyLocationBtn').addEventListener('click', function () {
+    if (!navigator.geolocation) {
+      statusEl.textContent = 'Geolocation is not supported by your browser.';
+      return;
+    }
+    statusEl.textContent = 'Locating you…';
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      var lat = pos.coords.latitude, lng = pos.coords.longitude;
+      var url = new URL(window.location.href);
+      url.searchParams.set('lat', lat);
+      url.searchParams.set('lng', lng);
+      url.searchParams.set('sort', 'nearby');
+      window.location.href = url.toString();
+    }, function () {
+      statusEl.textContent = "Couldn't get your location. Please check permissions and try again.";
+    });
+  });
+})();
+</script>
+{% endblock %}

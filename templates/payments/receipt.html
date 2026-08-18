@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load lp_extras i18n %}
+{% block title %}Receipt — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="text-center mb-4">
+          <div class="category-card__icon chip-green mx-auto" style="width:80px;height:80px;font-size:2rem;"><i class="fa-solid fa-check"></i></div>
+          <h1 class="h3 mt-3 mb-1">Payment Successful</h1>
+          <p class="text-muted-2">A receipt has been generated for this transaction.</p>
+        </div>
+
+        <div class="lp-card p-4 p-md-5">
+          <div class="d-flex justify-content-between align-items-center mb-4 pb-4 border-bottom">
+            <div>
+              <div class="small text-muted-2">Transaction ID</div>
+              <div class="font-mono fw-semibold">{{ payment.transaction_id }}</div>
+            </div>
+            <span class="status-pill status-completed">{{ payment.get_status_display }}</span>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-6"><div class="small text-muted-2">Provider</div><div class="fw-semibold">{{ payment.booking.provider.display_name }}</div></div>
+            <div class="col-6"><div class="small text-muted-2">Service</div><div class="fw-semibold">{{ payment.booking.provider.category.name }}</div></div>
+            <div class="col-6"><div class="small text-muted-2">Payment Method</div><div class="fw-semibold">{{ payment.get_method_display }}</div></div>
+            <div class="col-6"><div class="small text-muted-2">Paid On</div><div class="fw-semibold">{{ payment.paid_at|date:"M d, Y g:i A" }}</div></div>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center p-3 rounded-3" style="background:var(--green-light);">
+            <strong>Amount Paid</strong>
+            <strong class="font-mono fs-5" style="color:var(--green-dark);">&#8377;{{ payment.amount|floatformat:0 }}</strong>
+          </div>
+
+          <div class="d-flex gap-2 mt-4">
+            <a href="{% url 'bookings:detail' payment.booking.pk %}" class="btn btn-lp-outline w-100">Back to Booking</a>
+            <button onclick="window.print()" class="btn btn-lp-primary w-100"><i class="fa-solid fa-print me-1"></i> Print Receipt</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

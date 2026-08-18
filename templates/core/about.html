@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load humanize i18n %}
+{% block title %}About Us — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<section class="page-header-band">
+  <div class="container text-center">
+    <span class="eyebrow">About {{ SITE_NAME }}</span>
+    <h1 class="mt-2 mb-2">Bringing trusted local pros to your doorstep</h1>
+    <p class="text-muted-2 container-narrow mx-auto mb-0">We built {{ SITE_NAME }} to make finding reliable, skilled local help as easy as ordering food online.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 reveal">
+        <span class="eyebrow">Our story</span>
+        <h2 class="mt-2 mb-3">A simpler way to get things fixed</h2>
+        <p class="text-muted-2">Finding a dependable electrician or plumber shouldn't mean asking five neighbours and hoping for the best. {{ SITE_NAME }} was built to bring that word-of-mouth trust online — with verified profiles, transparent pricing, and real reviews from real customers.</p>
+        <p class="text-muted-2 mb-4">Today, our platform connects thousands of households with skilled local professionals across electrical work, plumbing, painting, cleaning, tutoring, mechanics, carpentry, and more.</p>
+        <div class="d-flex gap-3">
+          <a href="{% url 'services:provider_list' %}" class="btn btn-lp-primary">{% trans "Find a Provider" %}</a>
+          <a href="{% url 'accounts:provider_register' %}" class="btn btn-lp-outline">Join as a Provider</a>
+        </div>
+      </div>
+      <div class="col-lg-6 reveal">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="lp-card p-4 text-center h-100">
+              <i class="fa-solid fa-shield-halved fa-2x mb-3" style="color:var(--green);"></i>
+              <h3 class="h6">Verified Providers</h3>
+              <p class="text-muted-2 small mb-0">Every listing is reviewed before it goes live.</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="lp-card p-4 text-center h-100">
+              <i class="fa-solid fa-star fa-2x mb-3" style="color:var(--gold);"></i>
+              <h3 class="h6">Real Reviews</h3>
+              <p class="text-muted-2 small mb-0">Only customers with completed bookings can review.</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="lp-card p-4 text-center h-100">
+              <i class="fa-solid fa-tags fa-2x mb-3" style="color:var(--blue);"></i>
+              <h3 class="h6">Transparent Pricing</h3>
+              <p class="text-muted-2 small mb-0">Hourly rates are visible upfront, no surprises.</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="lp-card p-4 text-center h-100">
+              <i class="fa-solid fa-bolt fa-2x mb-3" style="color:var(--orange);"></i>
+              <h3 class="h6">Fast Booking</h3>
+              <p class="text-muted-2 small mb-0">Go from search to a confirmed booking in minutes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-band">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-6 col-md-3 stat-item reveal"><div class="num">{{ stats.providers|intcomma }}+</div><div class="lbl">Verified Providers</div></div>
+      <div class="col-6 col-md-3 stat-item reveal"><div class="num">{{ stats.customers|intcomma }}+</div><div class="lbl">Happy Customers</div></div>
+      <div class="col-6 col-md-3 stat-item reveal"><div class="num">{{ stats.completed_bookings|intcomma }}+</div><div class="lbl">Jobs Completed</div></div>
+      <div class="col-6 col-md-3 stat-item reveal"><div class="num">{{ stats.avg_rating }}★</div><div class="lbl">Average Rating</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="eyebrow">What we stand for</span>
+      <h2 class="mt-2">Our values</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6 reveal">
+        <div class="category-card">
+          <div class="category-card__icon chip-navy"><i class="fa-solid fa-handshake"></i></div>
+          <h3>Trust</h3>
+          <p class="text-muted-2 small mb-0">Every provider is verified so you can book with confidence.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 reveal">
+        <div class="category-card">
+          <div class="category-card__icon chip-green"><i class="fa-solid fa-gem"></i></div>
+          <h3>Quality</h3>
+          <p class="text-muted-2 small mb-0">We champion craftsmanship, professionalism and pride in the work.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 reveal">
+        <div class="category-card">
+          <div class="category-card__icon chip-orange"><i class="fa-solid fa-people-group"></i></div>
+          <h3>Community</h3>
+          <p class="text-muted-2 small mb-0">We're built for neighbourhoods — local jobs, local people.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 reveal">
+        <div class="category-card">
+          <div class="category-card__icon chip-blue"><i class="fa-solid fa-eye"></i></div>
+          <h3>Transparency</h3>
+          <p class="text-muted-2 small mb-0">Clear pricing and honest reviews, always.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

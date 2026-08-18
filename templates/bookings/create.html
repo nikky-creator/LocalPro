@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load lp_extras i18n %}
+{% block title %}Book {{ provider.display_name }} — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<section class="page-header-band">
+  <div class="container">
+    <nav class="breadcrumb-lp small mb-2">
+      <a href="{% url 'services:provider_list' %}">Providers</a> <span class="divider-dot mx-1">/</span>
+      <a href="{% url 'services:provider_detail' provider.pk %}">{{ provider.display_name }}</a> <span class="divider-dot mx-1">/</span>
+      <span class="active">Book</span>
+    </nav>
+    <h1 class="h2 mb-0">Book {{ provider.display_name }}</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-4 order-lg-2">
+        <div class="dash-panel p-4" style="position:sticky; top:90px;">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            {% if provider.photo %}<img src="{{ provider.photo.url }}" alt="" style="width:60px;height:60px;border-radius:var(--r-md);object-fit:cover;">{% else %}<span class="avatar-circle" style="width:60px;height:60px;">{{ provider.display_name|initials }}</span>{% endif %}
+            <div>
+              <div class="fw-semibold">{{ provider.display_name }}</div>
+              <div class="small text-muted-2"><i class="{{ provider.category.icon }} me-1"></i>{{ provider.category.name }}</div>
+            </div>
+          </div>
+          <hr>
+          <div class="d-flex justify-content-between small mb-2"><span class="text-muted-2">Rate</span><strong>&#8377;{{ provider.price_per_hour|floatformat:0 }}/hr</strong></div>
+          <div class="d-flex justify-content-between small mb-2"><span class="text-muted-2">Rating</span><strong>{{ provider.average_rating|default:"New" }}{% if provider.average_rating %} ★{% endif %}</strong></div>
+          <div class="d-flex justify-content-between small mb-2"><span class="text-muted-2">Location</span><strong>{{ provider.location }}, {{ provider.city }}</strong></div>
+          <div class="d-flex justify-content-between small"><span class="text-muted-2">Available</span><strong>{{ provider.availability_day_list|join:", " }}</strong></div>
+        </div>
+      </div>
+      <div class="col-lg-6 order-lg-1">
+        <div class="lp-card p-4 p-md-5">
+          <h2 class="h5 mb-4">{% trans "Booking Details" %}</h2>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">{% trans "Service Date" %}</label>
+                {{ form.service_date }}
+                {% for error in form.service_date.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">{% trans "Service Time" %}</label>
+                {{ form.service_time }}
+                {% for error in form.service_time.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-12">
+                <label class="form-label">{% trans "Service Address" %}</label>
+                {{ form.address }}
+                {% for error in form.address.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-12">
+                <label class="form-label">Notes for provider <span class="text-muted-2 fw-normal">(optional)</span></label>
+                {{ form.notes }}
+              </div>
+              <div class="col-12">
+                <label class="form-label d-block mb-2">{% trans "Payment Options" %}</label>
+                <div class="row g-2">
+                  {% for radio in form.preferred_payment_method %}
+                  <div class="col-4">
+                    {{ radio.tag }}
+                    <label class="btn btn-lp-outline w-100 btn-sm" for="{{ radio.id_for_label }}">
+                      {% if radio.data.value == 'card' %}<i class="fa-solid fa-credit-card d-block mb-1"></i>Card
+                      {% elif radio.data.value == 'upi' %}<i class="fa-solid fa-mobile-screen d-block mb-1"></i>UPI
+                      {% else %}<i class="fa-solid fa-building-columns d-block mb-1"></i>Net Banking{% endif %}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+                {% for error in form.preferred_payment_method.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+                <p class="small text-muted-2 mt-2 mb-0">{{ form.preferred_payment_method.help_text }}</p>
+              </div>
+              {% if form.non_field_errors %}<div class="col-12"><div class="text-danger small">{{ form.non_field_errors }}</div></div>{% endif %}
+              <div class="col-12">
+                <button type="submit" class="btn btn-lp-primary btn-lg w-100 mt-2"><i class="fa-solid fa-paper-plane me-1"></i> {% trans "Send Booking Request" %}</button>
+                <p class="small text-muted-2 text-center mt-3 mb-0">The provider will accept or decline your request. You won't be charged until the job is confirmed.</p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}Contact Us — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<section class="page-header-band">
+  <div class="container text-center">
+    <span class="eyebrow">Get in touch</span>
+    <h1 class="mt-2 mb-2">We'd love to hear from you</h1>
+    <p class="text-muted-2 container-narrow mx-auto mb-0">Questions, feedback, or partnership ideas — send us a message and our team will respond within 24 hours.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-7 reveal">
+        <div class="lp-card p-4 p-md-5">
+          <h2 class="h4 mb-4">Send us a message</h2>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label" for="{{ form.name.id_for_label }}">{% trans "Your Name" %}</label>
+                {{ form.name }}
+                {% for error in form.name.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="{{ form.email.id_for_label }}">{% trans "Email Address" %}</label>
+                {{ form.email }}
+                {% for error in form.email.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="{{ form.subject.id_for_label }}">{% trans "Subject" %}</label>
+                {{ form.subject }}
+                {% for error in form.subject.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="{{ form.message.id_for_label }}">{% trans "Message" %}</label>
+                {{ form.message }}
+                {% for error in form.message.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-lp-primary btn-lg w-100"><i class="fa-solid fa-paper-plane me-2"></i>{% trans "Send Message" %}</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-5 reveal">
+        <div class="dash-hero h-100" style="margin-bottom:0;">
+          <h2 class="h4 text-white mb-4">Contact information</h2>
+          <ul class="list-unstyled">
+            <li class="d-flex gap-3 mb-4">
+              <span class="avatar-circle" style="width:44px;height:44px;"><i class="fa-solid fa-location-dot"></i></span>
+              <div><strong class="d-block">Our Office</strong><span style="color:rgba(255,255,255,0.75);">Governorpet, Vijayawada,<br>Andhra Pradesh 520002</span></div>
+            </li>
+            <li class="d-flex gap-3 mb-4">
+              <span class="avatar-circle" style="width:44px;height:44px;"><i class="fa-solid fa-phone"></i></span>
+              <div><strong class="d-block">Call Us</strong><span style="color:rgba(255,255,255,0.75);">+91 98765 43210</span></div>
+            </li>
+            <li class="d-flex gap-3 mb-4">
+              <span class="avatar-circle" style="width:44px;height:44px;"><i class="fa-solid fa-envelope"></i></span>
+              <div><strong class="d-block">Email Us</strong><span style="color:rgba(255,255,255,0.75);">support@localpro.example</span></div>
+            </li>
+            <li class="d-flex gap-3">
+              <span class="avatar-circle" style="width:44px;height:44px;"><i class="fa-solid fa-clock"></i></span>
+              <div><strong class="d-block">Working Hours</strong><span style="color:rgba(255,255,255,0.75);">Mon – Sat: 9:00 AM – 7:00 PM</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

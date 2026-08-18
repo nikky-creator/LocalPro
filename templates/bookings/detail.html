@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load lp_extras i18n %}
+{% block title %}Booking #{{ booking.pk }} — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<section class="page-header-band">
+  <div class="container">
+    <nav class="breadcrumb-lp small mb-2">
+      {% if request.user.id == booking.customer_id %}<a href="{% url 'bookings:history' %}">{% trans "Booking History" %}</a>{% else %}<a href="{% url 'accounts:dashboard' %}">{% trans "Dashboard" %}</a>{% endif %}
+      <span class="divider-dot mx-1">/</span> <span class="active">Booking #{{ booking.pk }}</span>
+    </nav>
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <h1 class="h2 mb-0">Booking #{{ booking.pk }}</h1>
+      <span class="status-pill status-{{ booking.status }} fs-6">{{ booking.get_status_display }}</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div class="lp-card p-4 p-md-5 mb-4">
+          <h2 class="h6 mb-3">Service Details</h2>
+          <div class="row g-3">
+            <div class="col-md-6"><div class="small text-muted-2">Date</div><div class="fw-semibold">{{ booking.service_date|date:"l, M d, Y" }}</div></div>
+            <div class="col-md-6"><div class="small text-muted-2">Time</div><div class="fw-semibold">{{ booking.service_time|time:"g:i A" }}</div></div>
+            <div class="col-12"><div class="small text-muted-2">Address</div><div class="fw-semibold">{{ booking.address }}</div></div>
+            {% if booking.notes %}<div class="col-12"><div class="small text-muted-2">Notes</div><div class="fw-semibold">{{ booking.notes }}</div></div>{% endif %}
+            {% if booking.provider_note %}<div class="col-12"><div class="small text-muted-2">Provider's note</div><div class="fw-semibold">{{ booking.provider_note }}</div></div>{% endif %}
+            <div class="col-md-6"><div class="small text-muted-2">Rate</div><div class="fw-semibold">&#8377;{{ booking.estimated_total|floatformat:0 }}/hr</div></div>
+            <div class="col-md-6"><div class="small text-muted-2">Booked On</div><div class="fw-semibold">{{ booking.created_at|date:"M d, Y" }}</div></div>
+            <div class="col-md-6">
+              <div class="small text-muted-2">Payment Method</div>
+              <div class="fw-semibold">
+                {% if booking.preferred_payment_method == 'card' %}<i class="fa-solid fa-credit-card me-1"></i>
+                {% elif booking.preferred_payment_method == 'upi' %}<i class="fa-solid fa-mobile-screen me-1"></i>
+                {% else %}<i class="fa-solid fa-building-columns me-1"></i>{% endif %}
+                {{ booking.get_preferred_payment_method_display }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-card p-4 p-md-5">
+          {% if request.user.id == booking.customer_id %}
+            <h2 class="h6 mb-3">Provider</h2>
+            <div class="d-flex align-items-center gap-3 flex-wrap">
+              {% if booking.provider.photo %}<img src="{{ booking.provider.photo.url }}" style="width:64px;height:64px;border-radius:var(--r-md);object-fit:cover;" alt="">{% else %}<span class="avatar-circle" style="width:64px;height:64px;">{{ booking.provider.display_name|initials }}</span>{% endif %}
+              <div class="me-auto">
+                <div class="fw-semibold">{{ booking.provider.display_name }}</div>
+                <div class="small text-muted-2">{{ booking.provider.category.name }} &middot; {{ booking.provider.location }}, {{ booking.provider.city }}</div>
+              </div>
+              <a href="{% url 'services:provider_detail' booking.provider.pk %}" class="btn btn-lp-outline btn-sm-pill btn-sm">View Profile</a>
+            </div>
+          {% else %}
+            <h2 class="h6 mb-3">Customer</h2>
+            <div class="d-flex align-items-center gap-3">
+              <span class="avatar-circle" style="width:64px;height:64px;">{{ booking.customer.get_full_name|default:booking.customer.username|initials }}</span>
+              <div>
+                <div class="fw-semibold">{{ booking.customer.get_full_name|default:booking.customer.username }}</div>
+                <div class="small text-muted-2">{{ booking.customer.email }}{% if booking.customer.profile.phone %} &middot; {{ booking.customer.profile.phone }}{% endif %}</div>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="dash-panel p-4">
+          <h2 class="h6 mb-3">{% trans "Actions" %}</h2>
+          {% if request.user.id == booking.customer_id %}
+            {% if booking.status == 'completed' %}
+              {% if booking.payment.status == 'success' %}
+                <div class="alert alert-success small py-2 mb-2"><i class="fa-solid fa-circle-check me-1"></i> Paid &#8377;{{ booking.payment.amount|floatformat:0 }} on {{ booking.payment.paid_at|date:"M d, Y" }}. <a href="{% url 'payments:receipt' booking.payment.pk %}">View receipt</a></div>
+              {% else %}
+                <a href="{% url 'payments:checkout' booking.pk %}" class="btn btn-lp-primary w-100 mb-2"><i class="fa-solid fa-credit-card me-1"></i> {% trans "Pay" %}&#8377;{{ booking.estimated_total|floatformat:0 }}</a>
+              {% endif %}
+            {% endif %}
+            {% if booking.is_reviewable %}
+              <a href="{% url 'reviews:add' booking.pk %}" class="btn btn-lp-outline w-100 mb-2"><i class="fa-solid fa-star me-1"></i> {% trans "Leave a Review" %}</a>
+            {% elif booking.review %}
+              <div class="alert alert-success small py-2"><i class="fa-solid fa-circle-check me-1"></i> You've reviewed this booking.</div>
+            {% endif %}
+            {% if booking.is_cancellable %}
+              <form method="post" action="{% url 'bookings:cancel' booking.pk %}" data-confirm="Cancel this booking? This cannot be undone." class="mb-2">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-lp-danger w-100"><i class="fa-solid fa-ban me-1"></i> Cancel Booking</button>
+              </form>
+            {% endif %}
+            {% if booking.status != 'pending' %}
+              <a href="{% url 'reports:create' booking.pk %}" class="btn btn-lp-outline btn-sm w-100 mt-1" style="border-color:var(--border); color:var(--muted);">
+                <i class="fa-solid fa-flag me-1"></i> {% if booking.report %}View Report Status{% else %}Report a Problem{% endif %}
+              </a>
+            {% endif %}
+          {% else %}
+            {% if booking.status == 'pending' %}
+              <form method="post" action="{% url 'bookings:accept' booking.pk %}" class="mb-2">
+                {% csrf_token %}<input type="hidden" name="next" value="detail">
+                <button type="submit" class="btn btn-lp-primary w-100"><i class="fa-solid fa-check me-1"></i> Accept Booking</button>
+              </form>
+              <button class="btn btn-lp-danger w-100" type="button" data-bs-toggle="modal" data-bs-target="#rejectModal"><i class="fa-solid fa-xmark me-1"></i> Reject Booking</button>
+            {% elif booking.status == 'accepted' %}
+              <form method="post" action="{% url 'bookings:complete' booking.pk %}" data-confirm="Mark this booking as completed?">
+                {% csrf_token %}<input type="hidden" name="next" value="detail">
+                <button type="submit" class="btn btn-lp-primary w-100"><i class="fa-solid fa-flag-checkered me-1"></i> Mark Complete</button>
+              </form>
+            {% else %}
+              <p class="text-muted-2 small mb-0">No further actions available for this booking.</p>
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if booking.status == 'pending' and request.user.id != booking.customer_id %}
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="post" action="{% url 'bookings:reject' booking.pk %}">
+        {% csrf_token %}<input type="hidden" name="next" value="detail">
+        <div class="modal-header">
+          <h5 class="modal-title">Reject Booking #{{ booking.pk }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <textarea name="reason" class="form-control" rows="3" placeholder="Reason (optional)"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-lp-outline btn-sm-pill" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-lp-danger btn-sm-pill">{% trans "Reject Booking" %}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

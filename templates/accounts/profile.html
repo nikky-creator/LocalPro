@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load lp_extras i18n %}
+{% block title %}My Profile — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<section class="page-header-band">
+  <div class="container">
+    <nav class="breadcrumb-lp small mb-2"><a href="{% url 'accounts:dashboard' %}">{% trans "Dashboard" %}</a> <span class="divider-dot mx-1">/</span> <span class="active">{% trans "My Profile" %}</span></nav>
+    <h1 class="h2 mb-0">{% trans "My Profile" %}</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="lp-card p-4 text-center">
+          <img id="avatarPreview" class="mb-3" style="width:120px;height:120px;border-radius:50%;object-fit:cover;"
+               alt=""
+               src="{% if profile.avatar %}{{ profile.avatar.url }}{% else %}data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='60' fill='%2316223e'/%3E%3Ctext x='50%25' y='54%25' font-family='sans-serif' font-size='40' fill='white' text-anchor='middle' dy='.1em'%3E{{ profile.initials }}%3C/text%3E%3C/svg%3E{% endif %}">
+
+          <h2 class="h5 mb-1">{{ user.get_full_name|default:user.username }}</h2>
+          <p class="text-muted-2 small mb-2">{{ user.email }}</p>
+          <span class="status-pill status-accepted">{{ profile.get_role_display }}</span>
+          <hr class="my-4">
+          <ul class="list-unstyled text-start small text-muted-2">
+            <li class="mb-2"><i class="fa-solid fa-phone fa-fw me-2"></i>{{ profile.phone|default:"Not provided" }}</li>
+            <li class="mb-2"><i class="fa-solid fa-location-dot fa-fw me-2"></i>{{ profile.city|default:"Not provided" }}</li>
+            <li><i class="fa-solid fa-calendar fa-fw me-2"></i>Joined {{ profile.created_at|date:"M Y" }}</li>
+          </ul>
+          {% if profile.is_provider %}
+            <a href="{% url 'services:provider_profile_edit' %}" class="btn btn-lp-outline btn-sm-pill w-100 mt-2"><i class="fa-solid fa-briefcase me-1"></i> Manage My Listing</a>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="lp-card p-4 p-md-5">
+          <h2 class="h5 mb-4">{% trans "Edit Profile" %} Information</h2>
+          <form method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">{% trans "First Name" %}</label>
+                {{ user_form.first_name }}
+                {% for error in user_form.first_name.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">{% trans "Last Name" %}</label>
+                {{ user_form.last_name }}
+                {% for error in user_form.last_name.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-12">
+                <label class="form-label">{% trans "Email" %}</label>
+                {{ user_form.email }}
+                {% for error in user_form.email.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Phone</label>
+                {{ profile_form.phone }}
+                {% for error in profile_form.phone.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">{% trans "City" %}</label>
+                {{ profile_form.city }}
+                {% for error in profile_form.city.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-12">
+                <label class="form-label">Address</label>
+                {{ profile_form.address }}
+                {% for error in profile_form.address.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-12">
+                <label class="form-label">Profile Picture</label>
+                {{ profile_form.avatar }}
+                <div class="form-text">JPG, PNG or WEBP. Max size 5MB.</div>
+                {% for error in profile_form.avatar.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-lp-primary btn-lg mt-2"><i class="fa-solid fa-check me-1"></i> Save Changes</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

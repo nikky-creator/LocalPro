@@ -1,0 +1,22 @@
+{% if messages %}
+<div class="toast-container position-fixed top-0 end-0 p-3 lp-toast-container" style="margin-top:75px;">
+  {% for message in messages %}
+  <div class="toast align-items-center border-0 shadow-lg text-bg-{{ message.tags|default:'navy' }}" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body d-flex align-items-center gap-2">
+        {% if message.tags == 'success' %}<i class="fa-solid fa-circle-check"></i>
+        {% elif message.tags == 'danger' %}<i class="fa-solid fa-circle-exclamation"></i>
+        {% elif message.tags == 'warning' %}<i class="fa-solid fa-triangle-exclamation"></i>
+        {% else %}<i class="fa-solid fa-circle-info"></i>{% endif %}
+        {{ message }}
+      </div>
+      {% if message.tags == 'warning' or message.tags == 'info' %}
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      {% else %}
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}

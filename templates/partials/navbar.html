@@ -1,0 +1,83 @@
+{% load static i18n %}
+<nav class="navbar navbar-expand-lg navbar-lp">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'core:home' %}">
+      <img src="{% static 'images/logo.png' %}" alt="{{ SITE_NAME }}" class="logo-mark">
+      <span class="navbar-brand-text">Local<span>Pro</span></span>
+    </a>
+    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-label="{% trans 'Toggle navigation' %}">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav mx-lg-auto gap-lg-1 py-2 py-lg-0">
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.view_name == 'core:home' %}active{% endif %}" href="{% url 'core:home' %}">{% trans "Home" %}</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.view_name == 'services:category_list' %}active{% endif %}" href="{% url 'services:category_list' %}">{% trans "Services" %}</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.view_name == 'services:provider_list' %}active{% endif %}" href="{% url 'services:provider_list' %}">{% trans "Providers" %}</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.view_name == 'core:about' %}active{% endif %}" href="{% url 'core:about' %}">{% trans "About" %}</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.view_name == 'core:contact' %}active{% endif %}" href="{% url 'core:contact' %}">{% trans "Contact" %}</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2 py-2 py-lg-0 border-top border-lg-0 pt-3 pt-lg-0 mt-2 mt-lg-0">
+        <form action="{% url 'set_language' %}" method="post" class="d-inline">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.path }}">
+          <select name="language" class="form-select form-select-sm lang-select" onchange="this.form.submit()" aria-label="{% trans 'Choose language' %}" style="width:auto;">
+            {% get_current_language as CURRENT_LANG %}
+            {% get_available_languages as AVAILABLE_LANGS %}
+            {% for code, name in AVAILABLE_LANGS %}
+              <option value="{{ code }}" {% if code == CURRENT_LANG %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+          </select>
+        </form>
+        <button type="button" class="btn btn-lp-outline btn-sm-pill theme-toggle" id="themeToggleBtn" aria-label="{% trans 'Toggle dark mode' %}" title="{% trans 'Toggle dark mode' %}">
+          <i class="fa-solid fa-sun"></i><i class="fa-solid fa-moon"></i>
+        </button>
+        {% if user.is_authenticated %}
+          {% if user.profile.is_customer %}
+            <a href="{% url 'bookings:history' %}" class="nav-link">
+              <i class="fa-solid fa-clock-rotate-left me-1"></i>{% trans "Bookings" %}{% if nav_active_count %}<span class="badge-count">{{ nav_active_count }}</span>{% endif %}
+            </a>
+          {% elif user.profile.is_provider %}
+            <a href="{% url 'accounts:dashboard' %}" class="nav-link">
+              <i class="fa-solid fa-inbox me-1"></i>{% trans "Requests" %}{% if nav_pending_count %}<span class="badge-count">{{ nav_pending_count }}</span>{% endif %}
+            </a>
+          {% endif %}
+          <div class="dropdown">
+            <button class="btn btn-lp-outline btn-sm-pill dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {% if user.profile.avatar %}
+                <img src="{{ user.profile.avatar.url }}" alt="" style="width:28px;height:28px;border-radius:50%;object-fit:cover;">
+              {% else %}
+                <span class="avatar-circle" style="width:28px;height:28px;font-size:.7rem;">{{ user.profile.initials }}</span>
+              {% endif %}
+              <span class="d-none d-md-inline">{{ user.first_name|default:user.username }}</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 py-2">
+              <li><span class="dropdown-item-text small text-muted-2">{% trans "Signed in as" %} <strong>{% if user.profile.is_provider %}{% trans "Provider" %}{% else %}{% trans "Customer" %}{% endif %}</strong></span></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'accounts:dashboard' %}"><i class="fa-solid fa-gauge fa-fw me-2"></i>{% trans "Dashboard" %}</a></li>
+              <li><a class="dropdown-item" href="{% url 'accounts:profile' %}"><i class="fa-solid fa-user fa-fw me-2"></i>{% trans "My Profile" %}</a></li>
+              {% if user.profile.is_customer %}
+                <li><a class="dropdown-item" href="{% url 'bookings:history' %}"><i class="fa-solid fa-clock-rotate-left fa-fw me-2"></i>{% trans "Booking History" %}</a></li>
+                <li><a class="dropdown-item" href="{% url 'reports:my_reports' %}"><i class="fa-solid fa-flag fa-fw me-2"></i>{% trans "My Reports" %}</a></li>
+                <li><a class="dropdown-item" href="{% url 'services:provider_list' %}"><i class="fa-solid fa-magnifying-glass fa-fw me-2"></i>{% trans "Find a Provider" %}</a></li>
+              {% endif %}
+              {% if user.profile.is_provider %}
+                <li><a class="dropdown-item" href="{% url 'services:provider_profile_edit' %}"><i class="fa-solid fa-briefcase fa-fw me-2"></i>{% trans "My Listing" %}</a></li>
+              {% endif %}
+              {% if user.is_staff %}<li><a class="dropdown-item" href="/admin/"><i class="fa-solid fa-shield-halved fa-fw me-2"></i>{% trans "Admin Panel" %}</a></li>{% endif %}
+              <li><hr class="dropdown-divider"></li>
+              <li class="px-3">
+                <form method="post" action="{% url 'accounts:logout' %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-sm btn-link text-danger p-0 text-decoration-none"><i class="fa-solid fa-right-from-bracket fa-fw me-2"></i>{% trans "Logout" %}</button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        {% else %}
+          <a href="{% url 'accounts:login' %}" class="nav-link">{% trans "Log In" %}</a>
+          <a href="{% url 'accounts:register_choice' %}" class="btn btn-lp-primary btn-sm-pill">{% trans "Get Started" %}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>

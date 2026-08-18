@@ -1,0 +1,688 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-15 15:56+0530\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: accounts/models.py:22 templates/partials/navbar.html:54
+msgid "Customer"
+msgstr "வாடிக்கையாளர்"
+
+#: accounts/models.py:23
+msgid "Service Provider"
+msgstr "சேவை வழங்குநர்"
+
+#: bookings/models.py:14 payments/models.py:32
+msgid "Pending"
+msgstr "நிலுவையில்"
+
+#: bookings/models.py:15
+msgid "Accepted"
+msgstr "ஏற்கப்பட்டது"
+
+#: bookings/models.py:16
+msgid "Rejected"
+msgstr "நிராகரிக்கப்பட்டது"
+
+#: bookings/models.py:17
+msgid "Completed"
+msgstr "முடிந்தது"
+
+#: bookings/models.py:18
+msgid "Cancelled"
+msgstr "ரத்து செய்யப்பட்டது"
+
+#: payments/models.py:23
+msgid "Credit / Debit Card"
+msgstr "கிரெடிட் / டெபிட் கார்டு"
+
+#: payments/models.py:24
+msgid "UPI"
+msgstr "UPI"
+
+#: payments/models.py:25
+msgid "Net Banking"
+msgstr "நெட் பேங்கிங்"
+
+#: payments/models.py:33
+msgid "Success"
+msgstr "வெற்றி"
+
+#: payments/models.py:34
+msgid "Failed"
+msgstr "தோல்வி"
+
+#: reports/models.py:14
+msgid "Provider did not show up"
+msgstr "வழங்குநர் வரவில்லை"
+
+#: reports/models.py:15
+msgid "Poor quality of work"
+msgstr "வேலையின் தரம் மோசம்"
+
+#: reports/models.py:16
+msgid "Overcharged / price dispute"
+msgstr "அதிக கட்டணம் / விலை மோதல்"
+
+#: reports/models.py:17
+msgid "Unprofessional behavior"
+msgstr "தொழில் நடத்தை இல்லாமை"
+
+#: reports/models.py:18
+msgid "Property damage"
+msgstr "சொத்து சேதம்"
+
+#: reports/models.py:19
+msgid "Other"
+msgstr "மற்றவை"
+
+#: reports/models.py:27
+msgid "Open"
+msgstr "திறந்துள்ளது"
+
+#: reports/models.py:28
+msgid "Under Review"
+msgstr "மறுஆய்வில்"
+
+#: reports/models.py:29
+msgid "Resolved"
+msgstr "தீர்க்கப்பட்டது"
+
+#: reports/models.py:30
+msgid "Dismissed"
+msgstr "தள்ளுபடி செய்யப்பட்டது"
+
+#: templates/accounts/customer_dashboard.html:11
+msgid "Customer Dashboard"
+msgstr "வாடிக்கையாளர் டாஷ்போர்டு"
+
+#: templates/accounts/customer_dashboard.html:12
+#: templates/accounts/provider_dashboard.html:25
+msgid "Welcome back,"
+msgstr "மீண்டும் வரவேற்கிறோம்,"
+
+#: templates/accounts/customer_dashboard.html:16
+#: templates/accounts/customer_dashboard.html:90 templates/core/about.html:23
+#: templates/partials/navbar.html:61
+msgid "Find a Provider"
+msgstr "வழங்குநரைத் தேடுங்கள்"
+
+#: templates/accounts/customer_dashboard.html:56
+msgid "Recent Bookings"
+msgstr "சமீபத்திய முன்பதிவுகள்"
+
+#: templates/accounts/customer_dashboard.html:57
+msgid "View all"
+msgstr "அனைத்தையும் காண்க"
+
+#: templates/accounts/customer_dashboard.html:74
+#: templates/accounts/provider_dashboard.html:100
+#: templates/bookings/history.html:44 templates/reports/create.html:34
+msgid "Details"
+msgstr "விவரங்கள்"
+
+#: templates/accounts/customer_dashboard.html:88
+#: templates/accounts/provider_dashboard.html:154
+msgid "Quick Actions"
+msgstr "விரைவு செயல்கள்"
+
+#: templates/accounts/customer_dashboard.html:91
+#: templates/bookings/detail.html:9 templates/bookings/history.html:3
+#: templates/bookings/history.html:8 templates/bookings/history.html:9
+#: templates/partials/navbar.html:59
+msgid "Booking History"
+msgstr "முன்பதிவு வரலாறு"
+
+#: templates/accounts/customer_dashboard.html:92
+#: templates/accounts/profile.html:38
+#: templates/accounts/provider_dashboard.html:157
+msgid "Edit Profile"
+msgstr "சுயவிவரத்தைத் திருத்து"
+
+#: templates/accounts/customer_register.html:29
+msgid "Create your account"
+msgstr "உங்கள் கணக்கை உருவாக்கவும்"
+
+#: templates/accounts/customer_register.html:36
+#: templates/accounts/profile.html:43
+#: templates/accounts/provider_register.html:36
+msgid "First Name"
+msgstr "முதல் பெயர்"
+
+#: templates/accounts/customer_register.html:41
+#: templates/accounts/profile.html:48
+#: templates/accounts/provider_register.html:41
+msgid "Last Name"
+msgstr "கடைசி பெயர்"
+
+#: templates/accounts/customer_register.html:51
+#: templates/accounts/profile.html:53
+#: templates/accounts/provider_register.html:51
+msgid "Email"
+msgstr "மின்னஞ்சல்"
+
+#: templates/accounts/customer_register.html:56
+#: templates/accounts/provider_register.html:56
+msgid "Phone Number"
+msgstr "தொலைபேசி எண்"
+
+#: templates/accounts/customer_register.html:61
+#: templates/accounts/profile.html:63 templates/services/provider_list.html:40
+#: templates/services/provider_profile_form.html:65
+msgid "City"
+msgstr "நகரம்"
+
+#: templates/accounts/customer_register.html:75
+#: templates/accounts/provider_register.html:66
+msgid "Confirm Password"
+msgstr "கடவுச்சொல்லை உறுதிப்படுத்தவும்"
+
+#: templates/accounts/customer_register.html:82
+msgid "Create Customer Account"
+msgstr "வாடிக்கையாளர் கணக்கை உருவாக்கு"
+
+#: templates/accounts/customer_register.html:86
+#: templates/accounts/provider_register.html:77
+#: templates/accounts/register_choice.html:36
+msgid "Already have an account?"
+msgstr "ஏற்கனவே கணக்கு உள்ளதா?"
+
+#: templates/accounts/customer_register.html:86
+#: templates/accounts/provider_register.html:77
+#: templates/accounts/register_choice.html:36
+msgid "Log in"
+msgstr "உள்நுழையவும்"
+
+#: templates/accounts/login.html:3 templates/accounts/login.html:43
+#: templates/partials/navbar.html:77
+msgid "Log In"
+msgstr "உள்நுழைவு"
+
+#: templates/accounts/login.html:13
+#, python-format
+msgid "Welcome back to %(SITE_NAME)s"
+msgstr "%(SITE_NAME)s க்கு மீண்டும் வரவேற்கிறோம்"
+
+#: templates/accounts/login.html:14
+msgid ""
+"Log in to manage your bookings, track requests, or keep your service listing"
+" up to date."
+msgstr ""
+"உங்கள் முன்பதிவுகளை நிர்வகிக்கவும், கோரிக்கைகளைக் கண்காணிக்கவும், அல்லது "
+"உங்கள் சேவைப் பட்டியலைப் புதுப்பித்த நிலையில் வைத்திருக்கவும் உள்நுழையவும்."
+
+#: templates/accounts/login.html:16
+msgid "Fast, secure access to your dashboard"
+msgstr "உங்கள் டாஷ்போர்டுக்கு விரைவான, பாதுகாப்பான அணுகல்"
+
+#: templates/accounts/login.html:17
+msgid "Pick up right where you left off"
+msgstr "நீங்கள் நிறுத்திய இடத்திலிருந்து தொடரவும்"
+
+#: templates/accounts/login.html:23
+msgid "Log in to your account"
+msgstr "உங்கள் கணக்கில் உள்நுழையவும்"
+
+#: templates/accounts/login.html:24
+msgid "New here?"
+msgstr "இங்கே புதியவரா?"
+
+#: templates/accounts/login.html:24
+msgid "Create an account"
+msgstr "கணக்கை உருவாக்கவும்"
+
+#: templates/accounts/login.html:33
+msgid "Username"
+msgstr "பயனர்பெயர்"
+
+#: templates/accounts/login.html:38
+msgid "Password"
+msgstr "கடவுச்சொல்"
+
+#: templates/accounts/login.html:47
+msgid "Don't have an account yet?"
+msgstr "இன்னும் கணக்கு இல்லையா?"
+
+#: templates/accounts/login.html:48
+msgid "Sign up as Customer"
+msgstr "வாடிக்கையாளராக பதிவு செய்யவும்"
+
+#: templates/accounts/login.html:49
+msgid "Sign up as Provider"
+msgstr "வழங்குநராக பதிவு செய்யவும்"
+
+#: templates/accounts/profile.html:8 templates/bookings/detail.html:9
+#: templates/bookings/history.html:8 templates/partials/navbar.html:56
+#: templates/reports/my_reports.html:8
+#: templates/services/provider_profile_form.html:8
+msgid "Dashboard"
+msgstr "டாஷ்போர்டு"
+
+#: templates/accounts/profile.html:8 templates/accounts/profile.html:9
+#: templates/partials/navbar.html:57
+msgid "My Profile"
+msgstr "எனது சுயவிவரம்"
+
+#: templates/accounts/provider_dashboard.html:3
+#: templates/accounts/provider_dashboard.html:24
+msgid "Provider Dashboard"
+msgstr "வழங்குநர் டாஷ்போர்டு"
+
+#: templates/accounts/provider_dashboard.html:73
+msgid "Booking Requests"
+msgstr "முன்பதிவு கோரிக்கைகள்"
+
+#: templates/accounts/provider_dashboard.html:97
+msgid "Mark Complete"
+msgstr "முடிந்ததாக குறிக்கவும்"
+
+#: templates/accounts/provider_dashboard.html:122
+#: templates/bookings/detail.html:124
+msgid "Reject Booking"
+msgstr "முன்பதிவை நிராகரி"
+
+#: templates/accounts/provider_dashboard.html:140
+msgid "Recent Reviews"
+msgstr "சமீபத்திய மதிப்பீடுகள்"
+
+#: templates/accounts/provider_register.html:73
+msgid "Create Provider Account"
+msgstr "வழங்குநர் கணக்கை உருவாக்கு"
+
+#: templates/accounts/register_choice.html:19
+msgid "I need a service"
+msgstr "எனக்கு ஒரு சேவை தேவை"
+
+#: templates/accounts/register_choice.html:21
+msgid "Continue as Customer"
+msgstr "வாடிக்கையாளராக தொடரவும்"
+
+#: templates/accounts/register_choice.html:29
+msgid "I offer a service"
+msgstr "நான் ஒரு சேவையை வழங்குகிறேன்"
+
+#: templates/accounts/register_choice.html:31
+msgid "Continue as Provider"
+msgstr "வழங்குநராக தொடரவும்"
+
+#: templates/bookings/create.html:38
+msgid "Booking Details"
+msgstr "முன்பதிவு விவரங்கள்"
+
+#: templates/bookings/create.html:43
+msgid "Service Date"
+msgstr "சேவை தேதி"
+
+#: templates/bookings/create.html:48
+msgid "Service Time"
+msgstr "சேவை நேரம்"
+
+#: templates/bookings/create.html:53
+msgid "Service Address"
+msgstr "சேவை முகவரி"
+
+#: templates/bookings/create.html:63
+msgid "Send Booking Request"
+msgstr "முன்பதிவு கோரிக்கையை அனுப்பு"
+
+#: templates/bookings/detail.html:62
+msgid "Actions"
+msgstr "செயல்கள்"
+
+#: templates/bookings/detail.html:68 templates/payments/checkout.html:101
+msgid "Pay"
+msgstr "செலுத்து"
+
+#: templates/bookings/detail.html:72
+msgid "Leave a Review"
+msgstr "மதிப்பாய்வு அளிக்கவும்"
+
+#: templates/core/contact.html:24
+msgid "Your Name"
+msgstr "உங்கள் பெயர்"
+
+#: templates/core/contact.html:29
+msgid "Email Address"
+msgstr "மின்னஞ்சல் முகவரி"
+
+#: templates/core/contact.html:34
+msgid "Subject"
+msgstr "பொருள்"
+
+#: templates/core/contact.html:39
+msgid "Message"
+msgstr "செய்தி"
+
+#: templates/core/contact.html:44
+msgid "Send Message"
+msgstr "செய்தியை அனுப்பு"
+
+#: templates/core/home.html:14
+msgid "Local Services, Made Easy"
+msgstr "உள்ளூர் சேவைகள், எளிதாக்கப்பட்டது"
+
+#: templates/core/home.html:15
+msgid "Find trusted local pros for every job around your home"
+msgstr ""
+"உங்கள் வீட்டைச் சுற்றியுள்ள ஒவ்வொரு வேலைக்கும் நம்பகமான உள்ளூர் நிபுணர்களைக்"
+" கண்டறியவும்"
+
+#: templates/core/home.html:16
+msgid ""
+"Electricians, plumbers, painters, cleaners, mechanics, tutors and more — "
+"verified, rated, and ready to book in minutes."
+msgstr ""
+"மின்சாரக்காரர்கள், பிளம்பர்கள், பெயிண்டர்கள், சுத்தம் செய்பவர்கள், "
+"மெக்கானிக்குகள், ஆசிரியர்கள் மற்றும் பலர் — சரிபார்க்கப்பட்ட, மதிப்பீடு "
+"செய்யப்பட்ட, நிமிடங்களில் முன்பதிவு செய்யத் தயார்."
+
+#: templates/core/home.html:21
+msgid "What do you need?"
+msgstr "உங்களுக்கு என்ன தேவை?"
+
+#: templates/core/home.html:22
+msgid "e.g. Electrician, AC repair..."
+msgstr "எ.கா. மின்சாரக்காரர், AC பழுது..."
+
+#: templates/core/home.html:25
+msgid "Your city"
+msgstr "உங்கள் நகரம்"
+
+#: templates/core/home.html:26
+msgid "e.g. Vijayawada"
+msgstr "எ.கா. விஜயவாடா"
+
+#: templates/core/home.html:30 templates/services/provider_list.html:25
+msgid "Search"
+msgstr "தேடு"
+
+#: templates/core/home.html:68
+msgid "Browse by category"
+msgstr "வகை வாரியாக உலாவு"
+
+#: templates/core/home.html:69
+msgid "What can we help you fix today?"
+msgstr "இன்று நாங்கள் உங்களுக்கு எதை சரிசெய்ய உதவலாம்?"
+
+#: templates/core/home.html:70
+msgid ""
+"Every category is packed with verified, background-checked local "
+"professionals."
+msgstr ""
+"ஒவ்வொரு வகையும் சரிபார்க்கப்பட்ட, பின்னணி-சரிபார்க்கப்பட்ட உள்ளூர் "
+"நிபுணர்களால் நிரம்பியுள்ளது."
+
+#: templates/core/home.html:79
+#, python-format
+msgid "%(counter)s provider"
+msgid_plural "%(counter)s providers"
+msgstr[0] "%(counter)s வழங்குநர்"
+msgstr[1] "%(counter)s வழங்குநர்கள்"
+
+#: templates/core/home.html:84
+msgid "Categories will appear here once added by an admin."
+msgstr "நிர்வாகி சேர்த்தவுடன் வகைகள் இங்கே தோன்றும்."
+
+#: templates/core/home.html:88
+msgid "View all categories"
+msgstr "அனைத்து வகைகளையும் காண்க"
+
+#: templates/core/home.html:98
+msgid "Top rated"
+msgstr "சிறந்த மதிப்பீடு"
+
+#: templates/core/home.html:99
+msgid "Featured local providers"
+msgstr "சிறப்பு உள்ளூர் வழங்குநர்கள்"
+
+#: templates/core/home.html:101
+msgid "Browse all providers"
+msgstr "அனைத்து வழங்குநர்களையும் உலாவு"
+
+#: templates/core/home.html:110
+msgid "No providers have joined yet — be the first!"
+msgstr "இன்னும் எந்த வழங்குநரும் சேரவில்லை — முதலில் நீங்களே சேருங்கள்!"
+
+#: templates/core/home.html:121
+msgid "Simple process"
+msgstr "எளிய செயல்முறை"
+
+#: templates/core/home.html:122
+msgid "Find. Book. Get it done."
+msgstr "தேடு. முன்பதிவு செய். முடி."
+
+#: templates/core/home.html:123
+msgid "From search to a finished job in three easy steps."
+msgstr "தேடலில் இருந்து முடிந்த வேலை வரை மூன்று எளிய படிகளில்."
+
+#: templates/core/home.html:129
+msgid "Find"
+msgstr "தேடு"
+
+#: templates/core/home.html:130
+msgid ""
+"Search by service, location, price or rating to discover the right local "
+"professional."
+msgstr ""
+"சரியான உள்ளூர் நிபுணரைக் கண்டறிய சேவை, இடம், விலை அல்லது மதிப்பீட்டின் மூலம்"
+" தேடுங்கள்."
+
+#: templates/core/home.html:135
+msgid "Book"
+msgstr "முன்பதிவு"
+
+#: templates/core/home.html:136
+msgid ""
+"Pick a date and time that works for you and send a booking request in "
+"seconds."
+msgstr ""
+"உங்களுக்கு ஏற்ற தேதி மற்றும் நேரத்தைத் தேர்ந்தெடுத்து சில வினாடிகளில் "
+"முன்பதிவு கோரிக்கையை அனுப்புங்கள்."
+
+#: templates/core/home.html:140
+msgid "Get It Done"
+msgstr "முடி"
+
+#: templates/core/home.html:141
+msgid ""
+"Your provider confirms, does the job, and you leave a review to help your "
+"community."
+msgstr ""
+"உங்கள் வழங்குநர் உறுதிப்படுத்தி, வேலையைச் செய்து, உங்கள் சமூகத்திற்கு உதவ "
+"நீங்கள் ஒரு மதிப்பாய்வை அளிக்கிறீர்கள்."
+
+#: templates/core/home.html:153
+msgid "Verified Providers"
+msgstr "சரிபார்க்கப்பட்ட வழங்குநர்கள்"
+
+#: templates/core/home.html:157
+msgid "Happy Customers"
+msgstr "மகிழ்ச்சியான வாடிக்கையாளர்கள்"
+
+#: templates/core/home.html:161
+msgid "Jobs Completed"
+msgstr "முடிக்கப்பட்ட வேலைகள்"
+
+#: templates/core/home.html:165
+msgid "Service Categories"
+msgstr "சேவை வகைகள்"
+
+#: templates/core/home.html:176
+msgid "Testimonials"
+msgstr "சான்றுகள்"
+
+#: templates/core/home.html:177
+msgid "Loved by customers &amp; providers alike"
+msgstr "வாடிக்கையாளர்கள் மற்றும் வழங்குநர்கள் இருவராலும் விரும்பப்படுகிறது"
+
+#: templates/core/home.html:207
+msgid "Are you a skilled professional?"
+msgstr "நீங்கள் திறமையான தொழில் வல்லுநரா?"
+
+#: templates/core/home.html:208
+#, python-format
+msgid ""
+"Join %(SITE_NAME)s to reach more local customers, manage bookings "
+"effortlessly, and grow your business."
+msgstr ""
+"மேலும் உள்ளூர் வாடிக்கையாளர்களை அடையவும், முன்பதிவுகளை எளிதாக "
+"நிர்வகிக்கவும், உங்கள் வணிகத்தை வளர்க்கவும் %(SITE_NAME)s இல் இணையுங்கள்."
+
+#: templates/core/home.html:211
+msgid "Join as a Provider"
+msgstr "வழங்குநராக இணையவும்"
+
+#: templates/partials/footer.html:10
+msgid ""
+"We connect you with verified electricians, plumbers, painters, cleaners, "
+"mechanics, tutors and more — right in your neighbourhood."
+msgstr ""
+"உங்கள் அக்கம்பக்கத்திலேயே சரிபார்க்கப்பட்ட மின்சாரக்காரர்கள், பிளம்பர்கள், "
+"பெயிண்டர்கள், சுத்தம் செய்பவர்கள், மெக்கானிக்குகள், ஆசிரியர்கள் மற்றும் "
+"பலருடன் உங்களை இணைக்கிறோம்."
+
+#: templates/partials/footer.html:19
+msgid "Quick Links"
+msgstr "விரைவு இணைப்புகள்"
+
+#: templates/partials/footer.html:21 templates/partials/navbar.html:13
+msgid "Home"
+msgstr "முகப்பு"
+
+#: templates/partials/footer.html:22
+msgid "Find Providers"
+msgstr "வழங்குநர்களைத் தேடு"
+
+#: templates/partials/footer.html:23
+msgid "About Us"
+msgstr "எங்களை பற்றி"
+
+#: templates/partials/footer.html:24 templates/partials/navbar.html:17
+msgid "Contact"
+msgstr "தொடர்பு கொள்ளவும்"
+
+#: templates/partials/footer.html:28
+msgid "Popular Categories"
+msgstr "பிரபலமான வகைகள்"
+
+#: templates/partials/footer.html:36
+msgid "Get In Touch"
+msgstr "தொடர்பில் இருங்கள்"
+
+#: templates/partials/footer.html:43
+msgid "Become a Provider"
+msgstr "வழங்குநராக மாறு"
+
+#: templates/partials/footer.html:48
+msgid "All rights reserved."
+msgstr "அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை."
+
+#: templates/partials/footer.html:49
+msgid "Built with Django"
+msgstr "Django உடன் உருவாக்கப்பட்டது"
+
+#: templates/partials/footer.html:49
+msgid "Made for local communities"
+msgstr "உள்ளூர் சமூகங்களுக்காக உருவாக்கப்பட்டது"
+
+#: templates/partials/navbar.html:8
+msgid "Toggle navigation"
+msgstr "வழிசெலுத்தலை மாற்று"
+
+#: templates/partials/navbar.html:14
+msgid "Services"
+msgstr "சேவைகள்"
+
+#: templates/partials/navbar.html:15
+msgid "Providers"
+msgstr "வழங்குநர்கள்"
+
+#: templates/partials/navbar.html:16
+msgid "About"
+msgstr "பற்றி"
+
+#: templates/partials/navbar.html:23
+msgid "Choose language"
+msgstr "மொழியைத் தேர்ந்தெடு"
+
+#: templates/partials/navbar.html:31
+msgid "Toggle dark mode"
+msgstr "இருண்ட பயன்முறையை மாற்று"
+
+#: templates/partials/navbar.html:37
+msgid "Bookings"
+msgstr "முன்பதிவுகள்"
+
+#: templates/partials/navbar.html:41
+msgid "Requests"
+msgstr "கோரிக்கைகள்"
+
+#: templates/partials/navbar.html:54
+msgid "Signed in as"
+msgstr "இதுவாக உள்நுழைந்துள்ளீர்கள்"
+
+#: templates/partials/navbar.html:54
+msgid "Provider"
+msgstr "வழங்குநர்"
+
+#: templates/partials/navbar.html:60
+msgid "My Reports"
+msgstr "எனது புகார்கள்"
+
+#: templates/partials/navbar.html:64
+msgid "My Listing"
+msgstr "எனது பட்டியல்"
+
+#: templates/partials/navbar.html:66
+msgid "Admin Panel"
+msgstr "நிர்வாக பலகம்"
+
+#: templates/partials/navbar.html:71
+msgid "Logout"
+msgstr "வெளியேறு"
+
+#: templates/partials/navbar.html:78
+msgid "Get Started"
+msgstr "தொடங்கு"
+
+#: templates/services/provider_detail.html:39
+msgid "Book Now"
+msgstr "இப்போது முன்பதிவு செய்"
+
+#: templates/services/provider_list.html:20
+msgid "Filters"
+msgstr "வடிகட்டிகள்"
+
+#: templates/services/provider_list.html:21
+msgid "Clear all"
+msgstr "அனைத்தையும் அழி"
+
+#: templates/services/provider_list.html:30
+msgid "Category"
+msgstr "வகை"
+
+#: templates/services/provider_list.html:50
+msgid "Minimum Rating"
+msgstr "குறைந்தபட்ச மதிப்பீடு"
+
+#: templates/services/provider_list.html:65
+msgid "Apply Filters"
+msgstr "வடிகட்டிகளைப் பயன்படுத்து"
+
+#: templates/services/provider_list.html:77
+msgid "Sort by"
+msgstr "இதன் மூலம் வரிசைப்படுத்து"

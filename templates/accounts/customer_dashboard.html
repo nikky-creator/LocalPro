@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load lp_extras i18n %}
+{% block title %}My Dashboard — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<section class="pt-4">
+  <div class="container">
+    <div class="dash-hero">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <span class="eyebrow on-dark">{% trans "Customer Dashboard" %}</span>
+          <h1 class="text-white mt-2 mb-1">{% trans "Welcome back," %} {{ user.first_name|default:user.username }}!</h1>
+          <p style="color:rgba(255,255,255,0.7);" class="mb-0">Here's what's happening with your bookings.</p>
+        </div>
+        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+          <a href="{% url 'services:provider_list' %}" class="btn btn-lp-light"><i class="fa-solid fa-magnifying-glass me-1"></i> {% trans "Find a Provider" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pb-5">
+  <div class="container">
+    <div class="row g-3 dash-stat-row mb-5">
+      <div class="col-6 col-lg-3">
+        <div class="dash-stat d-flex align-items-center gap-3">
+          <span class="icon-badge chip-gold"><i class="fa-solid fa-hourglass-half"></i></span>
+          <div><div class="num">{{ pending_count }}</div><div class="lbl">Pending</div></div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="dash-stat d-flex align-items-center gap-3">
+          <span class="icon-badge chip-blue"><i class="fa-solid fa-check"></i></span>
+          <div><div class="num">{{ accepted_count }}</div><div class="lbl">Accepted</div></div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="dash-stat d-flex align-items-center gap-3">
+          <span class="icon-badge chip-green"><i class="fa-solid fa-flag-checkered"></i></span>
+          <div><div class="num">{{ completed_count }}</div><div class="lbl">Completed</div></div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="dash-stat d-flex align-items-center gap-3">
+          <span class="icon-badge chip-navy"><i class="fa-solid fa-calendar-days"></i></span>
+          <div><div class="num">{{ total_bookings }}</div><div class="lbl">Total Bookings</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div class="dash-panel">
+          <div class="dash-panel__header">
+            <h2 class="h6 mb-0">{% trans "Recent Bookings" %}</h2>
+            <a href="{% url 'bookings:history' %}" class="small">{% trans "View all" %} <i class="fa-solid fa-arrow-right ms-1"></i></a>
+          </div>
+          {% for booking in bookings %}
+            <div class="booking-row">
+              <div class="row align-items-center g-3">
+                <div class="col-auto">
+                  {% if booking.provider.photo %}
+                    <img src="{{ booking.provider.photo.url }}" class="prov-thumb" alt="">
+                  {% else %}
+                    <span class="avatar-circle prov-thumb" style="display:flex;">{{ booking.provider.display_name|initials }}</span>
+                  {% endif %}
+                </div>
+                <div class="col">
+                  <div class="fw-semibold">{{ booking.provider.display_name }}</div>
+                  <div class="small text-muted-2">{{ booking.provider.category.name }} &middot; {{ booking.service_date|date:"M d, Y" }} at {{ booking.service_time|time:"g:i A" }}</div>
+                </div>
+                <div class="col-auto"><span class="status-pill status-{{ booking.status }}">{{ booking.get_status_display }}</span></div>
+                <div class="col-auto"><a href="{% url 'bookings:detail' booking.pk %}" class="btn btn-lp-outline btn-sm-pill btn-sm">{% trans "Details" %}</a></div>
+              </div>
+            </div>
+          {% empty %}
+            <div class="empty-state">
+              <i class="fa-solid fa-calendar-xmark"></i>
+              <p>You haven't made any bookings yet.</p>
+              <a href="{% url 'services:provider_list' %}" class="btn btn-lp-primary btn-sm-pill">Browse Providers</a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="dash-panel p-4 mb-4">
+          <h2 class="h6 mb-3">{% trans "Quick Actions" %}</h2>
+          <div class="d-grid gap-2">
+            <a href="{% url 'services:provider_list' %}" class="btn btn-lp-outline btn-sm text-start"><i class="fa-solid fa-magnifying-glass me-2"></i>{% trans "Find a Provider" %}</a>
+            <a href="{% url 'bookings:history' %}" class="btn btn-lp-outline btn-sm text-start"><i class="fa-solid fa-clock-rotate-left me-2"></i>{% trans "Booking History" %}</a>
+            <a href="{% url 'accounts:profile' %}" class="btn btn-lp-outline btn-sm text-start"><i class="fa-solid fa-user me-2"></i>{% trans "Edit Profile" %}</a>
+          </div>
+        </div>
+        {% if pending_count or accepted_count %}
+        <div class="lp-card p-4" style="background:var(--green-light); border-color:#f3c9a8;">
+          <i class="fa-solid fa-circle-info mb-2" style="color:var(--green-dark);"></i>
+          <p class="small mb-0" style="color:var(--green-dark);">You have {{ pending_count|add:accepted_count }} active booking{{ pending_count|add:accepted_count|pluralize }}. We'll keep this dashboard updated as providers respond.</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

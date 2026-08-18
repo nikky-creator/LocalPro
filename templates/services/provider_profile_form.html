@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% if provider %}Edit My Listing{% else %}Set Up My Listing{% endif %} — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<section class="page-header-band">
+  <div class="container">
+    <nav class="breadcrumb-lp small mb-2"><a href="{% url 'accounts:dashboard' %}">{% trans "Dashboard" %}</a> <span class="divider-dot mx-1">/</span> <span class="active">My Listing</span></nav>
+    <h1 class="h2 mb-0">{% if provider %}Edit My Service Listing{% else %}Set Up My Service Listing{% endif %}</h1>
+    <p class="text-muted-2 mb-0">This is what customers see when they search for providers.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="lp-card p-4 text-center">
+          <img id="photoPreview" style="width:140px;height:140px;border-radius:var(--r-lg);object-fit:cover;" class="mb-3"
+               alt=""
+               src="{% if provider.photo %}{{ provider.photo.url }}{% else %}data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'%3E%3Crect width='140' height='140' rx='22' fill='%2316223e'/%3E%3Ctext x='50%25' y='54%25' font-family='sans-serif' font-size='44' fill='white' text-anchor='middle' dy='.1em'%3E{{ request.user.get_full_name|default:request.user.username|slice:':2'|upper }}%3C/text%3E%3C/svg%3E{% endif %}">
+          <p class="small text-muted-2 mb-0">Upload a clear photo of yourself or your work — listings with photos get booked more often.</p>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="lp-card p-4 p-md-5">
+          <form method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Service Category</label>
+                {{ form.category }}
+                {% for error in form.category.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Business Name <span class="text-muted-2 fw-normal">(optional)</span></label>
+                {{ form.business_name }}
+              </div>
+              <div class="col-12">
+                <label class="form-label">Bio</label>
+                {{ form.bio }}
+                {% for error in form.bio.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Experience (years)</label>
+                {{ form.experience_years }}
+                {% for error in form.experience_years.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Price (&#8377; / hour)</label>
+                {{ form.price_per_hour }}
+                {% for error in form.price_per_hour.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Photo</label>
+                {{ form.photo }}
+                {% for error in form.photo.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Area / Locality</label>
+                {{ form.location }}
+                {% for error in form.location.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">{% trans "City" %}</label>
+                {{ form.city }}
+                {% for error in form.city.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-12">
+                {{ form.latitude }}
+                {{ form.longitude }}
+                <button type="button" id="pinLocationBtn" class="btn btn-lp-outline btn-sm-pill btn-sm">
+                  <i class="fa-solid fa-crosshairs me-1"></i> {% trans "Pin My Exact Location" %}
+                </button>
+                <span id="pinStatus" class="small text-muted-2 ms-2">
+                  {% if form.instance.latitude %}<i class="fa-solid fa-circle-check" style="color:var(--green);"></i> Location pinned{% else %}Optional — helps nearby customers find you precisely on the map{% endif %}
+                </span>
+              </div>
+
+              <div class="col-12"><hr class="my-2"></div>
+              <div class="col-12">
+                <label class="form-label">Available Days</label>
+                <div class="d-flex flex-wrap gap-3">
+                  {% for checkbox in form.availability_day_choices %}
+                    <label class="d-flex align-items-center gap-2" style="font-weight:500; font-size:.9rem;">{{ checkbox.tag }} {{ checkbox.choice_label }}</label>
+                  {% endfor %}
+                </div>
+                {% for error in form.availability_day_choices.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Available From</label>
+                {{ form.availability_start }}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Available Until</label>
+                {{ form.availability_end }}
+                {% if form.non_field_errors %}<div class="text-danger small mt-1">{{ form.non_field_errors }}</div>{% endif %}
+              </div>
+
+              <div class="col-12 form-check mt-3">
+                {{ form.is_available }}
+                <label class="form-check-label" for="{{ form.is_available.id_for_label }}">Currently accepting new bookings</label>
+              </div>
+
+              <div class="col-12">
+                <button type="submit" class="btn btn-lp-primary btn-lg mt-3"><i class="fa-solid fa-check me-1"></i> {% if provider %}Save Changes{% else %}Publish My Listing{% endif %}</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  var btn = document.getElementById('pinLocationBtn');
+  var status = document.getElementById('pinStatus');
+  var latField = document.getElementById('id_latitude');
+  var lngField = document.getElementById('id_longitude');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    if (!navigator.geolocation) {
+      status.textContent = 'Geolocation is not supported by your browser.';
+      return;
+    }
+    status.textContent = 'Locating you…';
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      latField.value = pos.coords.latitude;
+      lngField.value = pos.coords.longitude;
+      status.innerHTML = '<i class="fa-solid fa-circle-check" style="color:var(--green);"></i> Location pinned — save to apply.';
+    }, function () {
+      status.textContent = "Couldn't get your location. Please check permissions and try again.";
+    });
+  });
+})();
+</script>
+{% endblock %}

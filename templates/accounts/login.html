@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+{% block title %}{% trans 'Log In' %} — {{ SITE_NAME }}{% endblock %}
+{% block body_class %}has-dark-hero{% endblock %}
+
+{% block content %}
+<section class="auth-wrap">
+  <div class="container" style="position:relative; z-index:1;">
+    <div class="auth-card row g-0 mx-auto" style="max-width:900px;">
+      <div class="col-lg-5 d-none d-lg-flex">
+        <div class="auth-card__side">
+          <img src="{% static 'images/logo.png' %}" alt="{{ SITE_NAME }}" style="width:64px;height:64px;margin-bottom:1.25rem;">
+          <h2 class="text-white mb-3">{% blocktrans %}Welcome back to {{ SITE_NAME }}{% endblocktrans %}</h2>
+          <p style="color:rgba(255,255,255,0.75);">{% trans "Log in to manage your bookings, track requests, or keep your service listing up to date." %}</p>
+          <ul class="list-unstyled mt-3">
+            <li><i class="fa-solid fa-circle-check"></i> {% trans "Fast, secure access to your dashboard" %}</li>
+            <li><i class="fa-solid fa-circle-check"></i> {% trans "Pick up right where you left off" %}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="auth-card__form">
+          <h2 class="h3 mb-1">{% trans "Log in to your account" %}</h2>
+          <p class="text-muted-2 mb-4">{% trans "New here?" %} <a href="{% url 'accounts:register_choice' %}">{% trans "Create an account" %}</a></p>
+
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+          {% endif %}
+
+          <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label">{% trans "Username" %}</label>
+              {{ form.username }}
+              {% for error in form.username.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+            </div>
+            <div class="mb-3">
+              <label class="form-label">{% trans "Password" %}</label>
+              {{ form.password }}
+              {% for error in form.password.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+            </div>
+            <input type="hidden" name="next" value="{{ next }}">
+            <button type="submit" class="btn btn-lp-primary btn-lg w-100 mt-2">{% trans "Log In" %}</button>
+          </form>
+
+          <div class="text-center mt-4">
+            <span class="text-muted-2 small">{% trans "Don't have an account yet?" %}</span><br>
+            <a href="{% url 'accounts:customer_register' %}" class="btn btn-lp-outline btn-sm-pill mt-2 me-2">{% trans "Sign up as Customer" %}</a>
+            <a href="{% url 'accounts:provider_register' %}" class="btn btn-lp-outline btn-sm-pill mt-2">{% trans "Sign up as Provider" %}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

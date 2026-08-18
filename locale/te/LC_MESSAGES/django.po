@@ -1,0 +1,685 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-15 15:56+0530\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: accounts/models.py:22 templates/partials/navbar.html:54
+msgid "Customer"
+msgstr "వినియోగదారు"
+
+#: accounts/models.py:23
+msgid "Service Provider"
+msgstr "సేవా ప్రదాత"
+
+#: bookings/models.py:14 payments/models.py:32
+msgid "Pending"
+msgstr "పెండింగ్‌లో ఉంది"
+
+#: bookings/models.py:15
+msgid "Accepted"
+msgstr "ఆమోదించబడింది"
+
+#: bookings/models.py:16
+msgid "Rejected"
+msgstr "తిరస్కరించబడింది"
+
+#: bookings/models.py:17
+msgid "Completed"
+msgstr "పూర్తయింది"
+
+#: bookings/models.py:18
+msgid "Cancelled"
+msgstr "రద్దు చేయబడింది"
+
+#: payments/models.py:23
+msgid "Credit / Debit Card"
+msgstr "క్రెడిట్ / డెబిట్ కార్డ్"
+
+#: payments/models.py:24
+msgid "UPI"
+msgstr "UPI"
+
+#: payments/models.py:25
+msgid "Net Banking"
+msgstr "నెట్ బ్యాంకింగ్"
+
+#: payments/models.py:33
+msgid "Success"
+msgstr "విజయవంతమైంది"
+
+#: payments/models.py:34
+msgid "Failed"
+msgstr "విఫలమైంది"
+
+#: reports/models.py:14
+msgid "Provider did not show up"
+msgstr "ప్రొవైడర్ రాలేదు"
+
+#: reports/models.py:15
+msgid "Poor quality of work"
+msgstr "పని నాణ్యత సరిగా లేదు"
+
+#: reports/models.py:16
+msgid "Overcharged / price dispute"
+msgstr "ఎక్కువ ధర వసూలు / ధర వివాదం"
+
+#: reports/models.py:17
+msgid "Unprofessional behavior"
+msgstr "అనుచితమైన ప్రవర్తన"
+
+#: reports/models.py:18
+msgid "Property damage"
+msgstr "ఆస్తి నష్టం"
+
+#: reports/models.py:19
+msgid "Other"
+msgstr "ఇతర"
+
+#: reports/models.py:27
+msgid "Open"
+msgstr "తెరిచి ఉంది"
+
+#: reports/models.py:28
+msgid "Under Review"
+msgstr "సమీక్షలో ఉంది"
+
+#: reports/models.py:29
+msgid "Resolved"
+msgstr "పరిష్కరించబడింది"
+
+#: reports/models.py:30
+msgid "Dismissed"
+msgstr "తోసిపుచ్చబడింది"
+
+#: templates/accounts/customer_dashboard.html:11
+msgid "Customer Dashboard"
+msgstr "కస్టమర్ డాష్‌బోర్డ్"
+
+#: templates/accounts/customer_dashboard.html:12
+#: templates/accounts/provider_dashboard.html:25
+msgid "Welcome back,"
+msgstr "తిరిగి స్వాగతం,"
+
+#: templates/accounts/customer_dashboard.html:16
+#: templates/accounts/customer_dashboard.html:90 templates/core/about.html:23
+#: templates/partials/navbar.html:61
+msgid "Find a Provider"
+msgstr "ప్రొవైడర్‌ను కనుగొనండి"
+
+#: templates/accounts/customer_dashboard.html:56
+msgid "Recent Bookings"
+msgstr "ఇటీవలి బుకింగ్‌లు"
+
+#: templates/accounts/customer_dashboard.html:57
+msgid "View all"
+msgstr "అన్నీ చూడండి"
+
+#: templates/accounts/customer_dashboard.html:74
+#: templates/accounts/provider_dashboard.html:100
+#: templates/bookings/history.html:44 templates/reports/create.html:34
+msgid "Details"
+msgstr "వివరాలు"
+
+#: templates/accounts/customer_dashboard.html:88
+#: templates/accounts/provider_dashboard.html:154
+msgid "Quick Actions"
+msgstr "త్వరిత చర్యలు"
+
+#: templates/accounts/customer_dashboard.html:91
+#: templates/bookings/detail.html:9 templates/bookings/history.html:3
+#: templates/bookings/history.html:8 templates/bookings/history.html:9
+#: templates/partials/navbar.html:59
+msgid "Booking History"
+msgstr "బుకింగ్ చరిత్ర"
+
+#: templates/accounts/customer_dashboard.html:92
+#: templates/accounts/profile.html:38
+#: templates/accounts/provider_dashboard.html:157
+msgid "Edit Profile"
+msgstr "ప్రొఫైల్‌ను సవరించండి"
+
+#: templates/accounts/customer_register.html:29
+msgid "Create your account"
+msgstr "మీ ఖాతాను సృష్టించండి"
+
+#: templates/accounts/customer_register.html:36
+#: templates/accounts/profile.html:43
+#: templates/accounts/provider_register.html:36
+msgid "First Name"
+msgstr "మొదటి పేరు"
+
+#: templates/accounts/customer_register.html:41
+#: templates/accounts/profile.html:48
+#: templates/accounts/provider_register.html:41
+msgid "Last Name"
+msgstr "చివరి పేరు"
+
+#: templates/accounts/customer_register.html:51
+#: templates/accounts/profile.html:53
+#: templates/accounts/provider_register.html:51
+msgid "Email"
+msgstr "ఇమెయిల్"
+
+#: templates/accounts/customer_register.html:56
+#: templates/accounts/provider_register.html:56
+msgid "Phone Number"
+msgstr "ఫోన్ నంబర్"
+
+#: templates/accounts/customer_register.html:61
+#: templates/accounts/profile.html:63 templates/services/provider_list.html:40
+#: templates/services/provider_profile_form.html:65
+msgid "City"
+msgstr "నగరం"
+
+#: templates/accounts/customer_register.html:75
+#: templates/accounts/provider_register.html:66
+msgid "Confirm Password"
+msgstr "పాస్‌వర్డ్‌ను నిర్ధారించండి"
+
+#: templates/accounts/customer_register.html:82
+msgid "Create Customer Account"
+msgstr "కస్టమర్ ఖాతాను సృష్టించండి"
+
+#: templates/accounts/customer_register.html:86
+#: templates/accounts/provider_register.html:77
+#: templates/accounts/register_choice.html:36
+msgid "Already have an account?"
+msgstr "ఇప్పటికే ఖాతా ఉందా?"
+
+#: templates/accounts/customer_register.html:86
+#: templates/accounts/provider_register.html:77
+#: templates/accounts/register_choice.html:36
+msgid "Log in"
+msgstr "లాగిన్ చేయండి"
+
+#: templates/accounts/login.html:3 templates/accounts/login.html:43
+#: templates/partials/navbar.html:77
+msgid "Log In"
+msgstr "లాగిన్"
+
+#: templates/accounts/login.html:13
+#, python-format
+msgid "Welcome back to %(SITE_NAME)s"
+msgstr "%(SITE_NAME)sకి తిరిగి స్వాగతం"
+
+#: templates/accounts/login.html:14
+msgid ""
+"Log in to manage your bookings, track requests, or keep your service listing"
+" up to date."
+msgstr ""
+"మీ బుకింగ్‌లను నిర్వహించడానికి, అభ్యర్థనలను ట్రాక్ చేయడానికి లేదా మీ సేవా "
+"జాబితాను తాజాగా ఉంచడానికి లాగిన్ అవ్వండి."
+
+#: templates/accounts/login.html:16
+msgid "Fast, secure access to your dashboard"
+msgstr "మీ డాష్‌బోర్డ్‌కు వేగవంతమైన, సురక్షితమైన యాక్సెస్"
+
+#: templates/accounts/login.html:17
+msgid "Pick up right where you left off"
+msgstr "మీరు ఆపిన చోటు నుండి కొనసాగించండి"
+
+#: templates/accounts/login.html:23
+msgid "Log in to your account"
+msgstr "మీ ఖాతాలోకి లాగిన్ అవ్వండి"
+
+#: templates/accounts/login.html:24
+msgid "New here?"
+msgstr "కొత్తగా వచ్చారా?"
+
+#: templates/accounts/login.html:24
+msgid "Create an account"
+msgstr "ఖాతాను సృష్టించండి"
+
+#: templates/accounts/login.html:33
+msgid "Username"
+msgstr "వినియోగదారు పేరు"
+
+#: templates/accounts/login.html:38
+msgid "Password"
+msgstr "పాస్‌వర్డ్"
+
+#: templates/accounts/login.html:47
+msgid "Don't have an account yet?"
+msgstr "ఇంకా ఖాతా లేదా?"
+
+#: templates/accounts/login.html:48
+msgid "Sign up as Customer"
+msgstr "కస్టమర్‌గా సైన్ అప్ చేయండి"
+
+#: templates/accounts/login.html:49
+msgid "Sign up as Provider"
+msgstr "ప్రొవైడర్‌గా సైన్ అప్ చేయండి"
+
+#: templates/accounts/profile.html:8 templates/bookings/detail.html:9
+#: templates/bookings/history.html:8 templates/partials/navbar.html:56
+#: templates/reports/my_reports.html:8
+#: templates/services/provider_profile_form.html:8
+msgid "Dashboard"
+msgstr "డాష్‌బోర్డ్"
+
+#: templates/accounts/profile.html:8 templates/accounts/profile.html:9
+#: templates/partials/navbar.html:57
+msgid "My Profile"
+msgstr "నా ప్రొఫైల్"
+
+#: templates/accounts/provider_dashboard.html:3
+#: templates/accounts/provider_dashboard.html:24
+msgid "Provider Dashboard"
+msgstr "ప్రొవైడర్ డాష్‌బోర్డ్"
+
+#: templates/accounts/provider_dashboard.html:73
+msgid "Booking Requests"
+msgstr "బుకింగ్ అభ్యర్థనలు"
+
+#: templates/accounts/provider_dashboard.html:97
+msgid "Mark Complete"
+msgstr "పూర్తయినట్లు గుర్తించండి"
+
+#: templates/accounts/provider_dashboard.html:122
+#: templates/bookings/detail.html:124
+msgid "Reject Booking"
+msgstr "బుకింగ్‌ను తిరస్కరించండి"
+
+#: templates/accounts/provider_dashboard.html:140
+msgid "Recent Reviews"
+msgstr "ఇటీవలి సమీక్షలు"
+
+#: templates/accounts/provider_register.html:73
+msgid "Create Provider Account"
+msgstr "ప్రొవైడర్ ఖాతాను సృష్టించండి"
+
+#: templates/accounts/register_choice.html:19
+msgid "I need a service"
+msgstr "నాకు సేవ కావాలి"
+
+#: templates/accounts/register_choice.html:21
+msgid "Continue as Customer"
+msgstr "కస్టమర్‌గా కొనసాగించండి"
+
+#: templates/accounts/register_choice.html:29
+msgid "I offer a service"
+msgstr "నేను సేవను అందిస్తాను"
+
+#: templates/accounts/register_choice.html:31
+msgid "Continue as Provider"
+msgstr "ప్రొవైడర్‌గా కొనసాగించండి"
+
+#: templates/bookings/create.html:38
+msgid "Booking Details"
+msgstr "బుకింగ్ వివరాలు"
+
+#: templates/bookings/create.html:43
+msgid "Service Date"
+msgstr "సేవా తేదీ"
+
+#: templates/bookings/create.html:48
+msgid "Service Time"
+msgstr "సేవా సమయం"
+
+#: templates/bookings/create.html:53
+msgid "Service Address"
+msgstr "సేవా చిరునామా"
+
+#: templates/bookings/create.html:63
+msgid "Send Booking Request"
+msgstr "బుకింగ్ అభ్యర్థనను పంపండి"
+
+#: templates/bookings/detail.html:62
+msgid "Actions"
+msgstr "చర్యలు"
+
+#: templates/bookings/detail.html:68 templates/payments/checkout.html:101
+msgid "Pay"
+msgstr "చెల్లించండి"
+
+#: templates/bookings/detail.html:72
+msgid "Leave a Review"
+msgstr "సమీక్ష ఇవ్వండి"
+
+#: templates/core/contact.html:24
+msgid "Your Name"
+msgstr "మీ పేరు"
+
+#: templates/core/contact.html:29
+msgid "Email Address"
+msgstr "ఇమెయిల్ చిరునామా"
+
+#: templates/core/contact.html:34
+msgid "Subject"
+msgstr "విషయం"
+
+#: templates/core/contact.html:39
+msgid "Message"
+msgstr "సందేశం"
+
+#: templates/core/contact.html:44
+msgid "Send Message"
+msgstr "సందేశాన్ని పంపండి"
+
+#: templates/core/home.html:14
+msgid "Local Services, Made Easy"
+msgstr "స్థానిక సేవలు, సులభతరం"
+
+#: templates/core/home.html:15
+msgid "Find trusted local pros for every job around your home"
+msgstr "మీ ఇంటి చుట్టూ ఉన్న ప్రతి పనికి నమ్మకమైన స్థానిక నిపుణులను కనుగొనండి"
+
+#: templates/core/home.html:16
+msgid ""
+"Electricians, plumbers, painters, cleaners, mechanics, tutors and more — "
+"verified, rated, and ready to book in minutes."
+msgstr ""
+"ఎలక్ట్రీషియన్లు, ప్లంబర్లు, పెయింటర్లు, క్లీనర్లు, మెకానిక్‌లు, ట్యూటర్లు "
+"మరియు మరిన్ని — ధృవీకరించబడిన, రేటింగ్ ఇవ్వబడిన, నిమిషాల్లో బుక్ చేయడానికి "
+"సిద్ధంగా ఉన్నాయి."
+
+#: templates/core/home.html:21
+msgid "What do you need?"
+msgstr "మీకు ఏమి కావాలి?"
+
+#: templates/core/home.html:22
+msgid "e.g. Electrician, AC repair..."
+msgstr "ఉదా. ఎలక్ట్రీషియన్, AC రిపేర్..."
+
+#: templates/core/home.html:25
+msgid "Your city"
+msgstr "మీ నగరం"
+
+#: templates/core/home.html:26
+msgid "e.g. Vijayawada"
+msgstr "ఉదా. విజయవాడ"
+
+#: templates/core/home.html:30 templates/services/provider_list.html:25
+msgid "Search"
+msgstr "వెతకండి"
+
+#: templates/core/home.html:68
+msgid "Browse by category"
+msgstr "వర్గం వారీగా బ్రౌజ్ చేయండి"
+
+#: templates/core/home.html:69
+msgid "What can we help you fix today?"
+msgstr "ఈ రోజు మేము మీకు ఏమి సరిచేయడంలో సహాయం చేయగలము?"
+
+#: templates/core/home.html:70
+msgid ""
+"Every category is packed with verified, background-checked local "
+"professionals."
+msgstr ""
+"ప్రతి వర్గం ధృవీకరించబడిన, నేపథ్య-తనిఖీ చేయబడిన స్థానిక నిపుణులతో నిండి "
+"ఉంది."
+
+#: templates/core/home.html:79
+#, python-format
+msgid "%(counter)s provider"
+msgid_plural "%(counter)s providers"
+msgstr[0] "%(counter)s ప్రొవైడర్"
+msgstr[1] "%(counter)s మంది ప్రొవైడర్‌లు"
+
+#: templates/core/home.html:84
+msgid "Categories will appear here once added by an admin."
+msgstr "అడ్మిన్ జోడించిన తర్వాత వర్గాలు ఇక్కడ కనిపిస్తాయి."
+
+#: templates/core/home.html:88
+msgid "View all categories"
+msgstr "అన్ని వర్గాలను చూడండి"
+
+#: templates/core/home.html:98
+msgid "Top rated"
+msgstr "అత్యధిక రేటింగ్"
+
+#: templates/core/home.html:99
+msgid "Featured local providers"
+msgstr "ఫీచర్డ్ స్థానిక ప్రొవైడర్లు"
+
+#: templates/core/home.html:101
+msgid "Browse all providers"
+msgstr "అన్ని ప్రొవైడర్‌లను బ్రౌజ్ చేయండి"
+
+#: templates/core/home.html:110
+msgid "No providers have joined yet — be the first!"
+msgstr "ఇంకా ఏ ప్రొవైడర్ చేరలేదు — మొదటివారు అవ్వండి!"
+
+#: templates/core/home.html:121
+msgid "Simple process"
+msgstr "సరళమైన ప్రక్రియ"
+
+#: templates/core/home.html:122
+msgid "Find. Book. Get it done."
+msgstr "వెతకండి. బుక్ చేయండి. పూర్తి చేయించుకోండి."
+
+#: templates/core/home.html:123
+msgid "From search to a finished job in three easy steps."
+msgstr "శోధన నుండి పూర్తయిన పని వరకు మూడు సులభ దశల్లో."
+
+#: templates/core/home.html:129
+msgid "Find"
+msgstr "వెతకండి"
+
+#: templates/core/home.html:130
+msgid ""
+"Search by service, location, price or rating to discover the right local "
+"professional."
+msgstr ""
+"సరైన స్థానిక నిపుణుడిని కనుగొనడానికి సేవ, స్థానం, ధర లేదా రేటింగ్ ద్వారా "
+"శోధించండి."
+
+#: templates/core/home.html:135
+msgid "Book"
+msgstr "బుక్ చేయండి"
+
+#: templates/core/home.html:136
+msgid ""
+"Pick a date and time that works for you and send a booking request in "
+"seconds."
+msgstr ""
+"మీకు అనుకూలమైన తేదీ మరియు సమయాన్ని ఎంచుకుని సెకన్లలో బుకింగ్ అభ్యర్థనను "
+"పంపండి."
+
+#: templates/core/home.html:140
+msgid "Get It Done"
+msgstr "పూర్తి చేయించుకోండి"
+
+#: templates/core/home.html:141
+msgid ""
+"Your provider confirms, does the job, and you leave a review to help your "
+"community."
+msgstr ""
+"మీ ప్రొవైడర్ నిర్ధారిస్తారు, పని చేస్తారు, మరియు మీరు మీ సంఘానికి సహాయం "
+"చేయడానికి సమీక్ష ఇస్తారు."
+
+#: templates/core/home.html:153
+msgid "Verified Providers"
+msgstr "ధృవీకరించబడిన ప్రొవైడర్‌లు"
+
+#: templates/core/home.html:157
+msgid "Happy Customers"
+msgstr "సంతోషకరమైన కస్టమర్‌లు"
+
+#: templates/core/home.html:161
+msgid "Jobs Completed"
+msgstr "పూర్తయిన పనులు"
+
+#: templates/core/home.html:165
+msgid "Service Categories"
+msgstr "సేవా వర్గాలు"
+
+#: templates/core/home.html:176
+msgid "Testimonials"
+msgstr "టెస్టిమోనియల్స్"
+
+#: templates/core/home.html:177
+msgid "Loved by customers &amp; providers alike"
+msgstr "కస్టమర్‌లు మరియు ప్రొవైడర్‌లు ఇద్దరూ ఇష్టపడతారు"
+
+#: templates/core/home.html:207
+msgid "Are you a skilled professional?"
+msgstr "మీరు నైపుణ్యం కలిగిన ప్రొఫెషనల్ నా?"
+
+#: templates/core/home.html:208
+#, python-format
+msgid ""
+"Join %(SITE_NAME)s to reach more local customers, manage bookings "
+"effortlessly, and grow your business."
+msgstr ""
+"మరింత మంది స్థానిక కస్టమర్‌లను చేరుకోవడానికి, బుకింగ్‌లను సులభంగా "
+"నిర్వహించడానికి మరియు మీ వ్యాపారాన్ని పెంచుకోవడానికి %(SITE_NAME)sలో చేరండి."
+
+#: templates/core/home.html:211
+msgid "Join as a Provider"
+msgstr "ప్రొవైడర్‌గా చేరండి"
+
+#: templates/partials/footer.html:10
+msgid ""
+"We connect you with verified electricians, plumbers, painters, cleaners, "
+"mechanics, tutors and more — right in your neighbourhood."
+msgstr ""
+"మేము మిమ్మల్ని మీ పరిసరాల్లోని ధృవీకరించబడిన ఎలక్ట్రీషియన్లు, ప్లంబర్లు, "
+"పెయింటర్లు, క్లీనర్లు, మెకానిక్‌లు, ట్యూటర్లు మరియు మరిన్నింటితో కలుపుతాము."
+
+#: templates/partials/footer.html:19
+msgid "Quick Links"
+msgstr "త్వరిత లింక్‌లు"
+
+#: templates/partials/footer.html:21 templates/partials/navbar.html:13
+msgid "Home"
+msgstr "హోమ్"
+
+#: templates/partials/footer.html:22
+msgid "Find Providers"
+msgstr "ప్రొవైడర్‌లను కనుగొనండి"
+
+#: templates/partials/footer.html:23
+msgid "About Us"
+msgstr "మా గురించి"
+
+#: templates/partials/footer.html:24 templates/partials/navbar.html:17
+msgid "Contact"
+msgstr "సంప్రదించండి"
+
+#: templates/partials/footer.html:28
+msgid "Popular Categories"
+msgstr "ప్రసిద్ధ వర్గాలు"
+
+#: templates/partials/footer.html:36
+msgid "Get In Touch"
+msgstr "సంప్రదించండి"
+
+#: templates/partials/footer.html:43
+msgid "Become a Provider"
+msgstr "ప్రొవైడర్ అవ్వండి"
+
+#: templates/partials/footer.html:48
+msgid "All rights reserved."
+msgstr "అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి."
+
+#: templates/partials/footer.html:49
+msgid "Built with Django"
+msgstr "Djangoతో నిర్మించబడింది"
+
+#: templates/partials/footer.html:49
+msgid "Made for local communities"
+msgstr "స్థానిక సంఘాల కోసం రూపొందించబడింది"
+
+#: templates/partials/navbar.html:8
+msgid "Toggle navigation"
+msgstr "నావిగేషన్‌ను టోగుల్ చేయండి"
+
+#: templates/partials/navbar.html:14
+msgid "Services"
+msgstr "సేవలు"
+
+#: templates/partials/navbar.html:15
+msgid "Providers"
+msgstr "ప్రొవైడర్‌లు"
+
+#: templates/partials/navbar.html:16
+msgid "About"
+msgstr "గురించి"
+
+#: templates/partials/navbar.html:23
+msgid "Choose language"
+msgstr "భాషను ఎంచుకోండి"
+
+#: templates/partials/navbar.html:31
+msgid "Toggle dark mode"
+msgstr "డార్క్ మోడ్‌ను టోగుల్ చేయండి"
+
+#: templates/partials/navbar.html:37
+msgid "Bookings"
+msgstr "బుకింగ్‌లు"
+
+#: templates/partials/navbar.html:41
+msgid "Requests"
+msgstr "అభ్యర్థనలు"
+
+#: templates/partials/navbar.html:54
+msgid "Signed in as"
+msgstr "గా సైన్ ఇన్ చేయబడింది"
+
+#: templates/partials/navbar.html:54
+msgid "Provider"
+msgstr "ప్రొవైడర్"
+
+#: templates/partials/navbar.html:60
+msgid "My Reports"
+msgstr "నా నివేదికలు"
+
+#: templates/partials/navbar.html:64
+msgid "My Listing"
+msgstr "నా లిస్టింగ్"
+
+#: templates/partials/navbar.html:66
+msgid "Admin Panel"
+msgstr "అడ్మిన్ ప్యానెల్"
+
+#: templates/partials/navbar.html:71
+msgid "Logout"
+msgstr "లాగ్అవుట్"
+
+#: templates/partials/navbar.html:78
+msgid "Get Started"
+msgstr "ప్రారంభించండి"
+
+#: templates/services/provider_detail.html:39
+msgid "Book Now"
+msgstr "ఇప్పుడే బుక్ చేయండి"
+
+#: templates/services/provider_list.html:20
+msgid "Filters"
+msgstr "ఫిల్టర్‌లు"
+
+#: templates/services/provider_list.html:21
+msgid "Clear all"
+msgstr "అన్నీ క్లియర్ చేయండి"
+
+#: templates/services/provider_list.html:30
+msgid "Category"
+msgstr "వర్గం"
+
+#: templates/services/provider_list.html:50
+msgid "Minimum Rating"
+msgstr "కనీస రేటింగ్"
+
+#: templates/services/provider_list.html:65
+msgid "Apply Filters"
+msgstr "ఫిల్టర్‌లను వర్తింపజేయండి"
+
+#: templates/services/provider_list.html:77
+msgid "Sort by"
+msgstr "దీని ద్వారా క్రమబద్ధీకరించండి"

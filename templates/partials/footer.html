@@ -1,0 +1,52 @@
+{% load static i18n %}
+<footer class="footer-lp">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <a href="{% url 'core:home' %}" class="d-flex align-items-center gap-2 mb-3 text-decoration-none">
+          <img src="{% static 'images/logo.png' %}" alt="{{ SITE_NAME }}" class="footer-logo">
+          <span class="navbar-brand-text" style="color:#fff;">Local<span style="color:#f3a463;">Pro</span></span>
+        </a>
+        <p class="small mb-3">{{ SITE_TAGLINE }}. {% trans "We connect you with verified electricians, plumbers, painters, cleaners, mechanics, tutors and more — right in your neighbourhood." %}</p>
+        <div class="d-flex gap-2">
+          <a href="#" class="footer-social" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="footer-social" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="footer-social" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="footer-social" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6 col-6">
+        <h6>{% trans "Quick Links" %}</h6>
+        <ul class="list-unstyled fw-nav">
+          <li><a href="{% url 'core:home' %}">{% trans "Home" %}</a></li>
+          <li><a href="{% url 'services:provider_list' %}">{% trans "Find Providers" %}</a></li>
+          <li><a href="{% url 'core:about' %}">{% trans "About Us" %}</a></li>
+          <li><a href="{% url 'core:contact' %}">{% trans "Contact" %}</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-md-6 col-6">
+        <h6>{% trans "Popular Categories" %}</h6>
+        <ul class="list-unstyled fw-nav">
+          {% for cat in footer_categories %}
+            <li><a href="{% url 'services:provider_list' %}?category={{ cat.slug }}">{{ cat.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <h6>{% trans "Get In Touch" %}</h6>
+        <ul class="list-unstyled fw-nav small">
+          <li class="d-flex gap-2"><i class="fa-solid fa-location-dot mt-1"></i><span>Governorpet, Vijayawada, Andhra Pradesh 520002</span></li>
+          <li class="d-flex gap-2"><i class="fa-solid fa-phone mt-1"></i><span>+91 98765 43210</span></li>
+          <li class="d-flex gap-2"><i class="fa-solid fa-envelope mt-1"></i><span>support@localpro.example</span></li>
+        </ul>
+        <a href="{% url 'accounts:provider_register' %}" class="btn btn-lp-primary btn-sm-pill mt-2">
+          <i class="fa-solid fa-briefcase me-1"></i> {% trans "Become a Provider" %}
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-center text-md-start">
+      <span>&copy; {% now "Y" %} {{ SITE_NAME }}. {% trans "All rights reserved." %}</span>
+      <span>{% trans "Built with Django" %} &middot; {% trans "Made for local communities" %}</span>
+    </div>
+  </div>
+</footer>

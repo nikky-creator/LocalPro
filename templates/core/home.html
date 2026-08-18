@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% load static lp_extras humanize i18n %}
+
+{% block title %}{{ SITE_NAME }} — {{ SITE_TAGLINE }}{% endblock %}
+{% block body_class %}has-dark-hero{% endblock %}
+
+{% block content %}
+
+<!-- HERO ---------------------------------------------------------------->
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6">
+        <span class="eyebrow on-dark"><i class="fa-solid fa-house-chimney me-1"></i> {% trans "Local Services, Made Easy" %}</span>
+        <h1 class="mt-3 mb-3">{% trans "Find trusted local pros for every job around your home" %}</h1>
+        <p class="lead mb-4">{% trans "Electricians, plumbers, painters, cleaners, mechanics, tutors and more — verified, rated, and ready to book in minutes." %}</p>
+
+        <form action="{% url 'services:provider_list' %}" method="get" class="hero-search glass">
+          <div class="row g-3 align-items-end">
+            <div class="col-md-5">
+              <label for="heroQ">{% trans "What do you need?" %}</label>
+              <input type="text" id="heroQ" name="q" class="form-control" placeholder="{% trans 'e.g. Electrician, AC repair...' %}">
+            </div>
+            <div class="col-md-4">
+              <label for="heroCity">{% trans "Your city" %}</label>
+              <input type="text" id="heroCity" name="city" class="form-control" placeholder="{% trans 'e.g. Vijayawada' %}">
+            </div>
+            <div class="col-md-3 d-grid">
+              <label class="d-none d-md-block">&nbsp;</label>
+              <button type="submit" class="btn btn-lp-primary"><i class="fa-solid fa-magnifying-glass me-1"></i> {% trans "Search" %}</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="hero-chip-row">
+          {% for cat in categories|slice:":5" %}
+            <a href="{% url 'services:provider_list' %}?category={{ cat.slug }}" class="hero-chip"><i class="{{ cat.icon }} me-1"></i>{{ cat.name }}</a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="col-lg-6 d-none d-md-flex justify-content-center">
+        <div class="service-ring">
+          <div class="service-ring__track"></div>
+          <div class="service-ring__orbit">
+            <div class="service-ring__node" style="transform: rotate(0deg) translateX(178px);"><div class="service-ring__icon chip-green" style="transform: rotate(0deg);"><i class="fa-solid fa-bolt"></i></div></div>
+            <div class="service-ring__node" style="transform: rotate(45deg) translateX(178px);"><div class="service-ring__icon chip-navy"><i class="fa-solid fa-faucet-drip"></i></div></div>
+            <div class="service-ring__node" style="transform: rotate(90deg) translateX(178px);"><div class="service-ring__icon chip-blue"><i class="fa-solid fa-paint-roller"></i></div></div>
+            <div class="service-ring__node" style="transform: rotate(135deg) translateX(178px);"><div class="service-ring__icon chip-green"><i class="fa-solid fa-broom"></i></div></div>
+            <div class="service-ring__node" style="transform: rotate(180deg) translateX(178px);"><div class="service-ring__icon chip-gold"><i class="fa-solid fa-screwdriver-wrench"></i></div></div>
+            <div class="service-ring__node" style="transform: rotate(225deg) translateX(178px);"><div class="service-ring__icon chip-orange"><i class="fa-solid fa-graduation-cap"></i></div></div>
+            <div class="service-ring__node" style="transform: rotate(270deg) translateX(178px);"><div class="service-ring__icon chip-navy"><i class="fa-solid fa-hammer"></i></div></div>
+            <div class="service-ring__node" style="transform: rotate(315deg) translateX(178px);"><div class="service-ring__icon chip-blue"><i class="fa-solid fa-fan"></i></div></div>
+          </div>
+          <div class="service-ring__hub">
+            <img src="{% static 'images/logo.png' %}" alt="LocalPro">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES ------------------------------------------------------------>
+<section class="section" id="categories">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="eyebrow">{% trans "Browse by category" %}</span>
+      <h2 class="mt-2">{% trans "What can we help you fix today?" %}</h2>
+      <p class="text-muted-2">{% trans "Every category is packed with verified, background-checked local professionals." %}</p>
+    </div>
+    <div class="row g-4">
+      {% for cat in categories %}
+      <div class="col-lg-3 col-md-4 col-6 reveal">
+        <a href="{% url 'services:provider_list' %}?category={{ cat.slug }}" class="text-decoration-none">
+          <div class="category-card">
+            <div class="category-card__icon chip-{{ cat.color }}"><i class="{{ cat.icon }}"></i></div>
+            <h3>{{ cat.name }}</h3>
+            <div class="count">{% blocktrans count counter=cat.provider_count %}{{ counter }} provider{% plural %}{{ counter }} providers{% endblocktrans %}</div>
+          </div>
+        </a>
+      </div>
+      {% empty %}
+        <p class="text-center text-muted-2">{% trans "Categories will appear here once added by an admin." %}</p>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-5 reveal">
+      <a href="{% url 'services:category_list' %}" class="btn btn-lp-outline">{% trans "View all categories" %} <i class="fa-solid fa-arrow-right ms-1"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROVIDERS ------------------------------------------------->
+<section class="section pt-0" id="providers">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-end mb-5 reveal">
+      <div>
+        <span class="eyebrow">{% trans "Top rated" %}</span>
+        <h2 class="mt-2 mb-0">{% trans "Featured local providers" %}</h2>
+      </div>
+      <a href="{% url 'services:provider_list' %}" class="btn btn-lp-outline mt-3 mt-md-0">{% trans "Browse all providers" %} <i class="fa-solid fa-arrow-right ms-1"></i></a>
+    </div>
+    <div class="row g-4">
+      {% for provider in featured_providers %}
+      <div class="col-lg-4 col-md-6 reveal">
+        {% include 'partials/provider_card.html' %}
+      </div>
+      {% empty %}
+      <div class="col-12">
+        <div class="empty-state"><i class="fa-solid fa-user-tie"></i><p class="mb-0">{% trans "No providers have joined yet — be the first!" %}</p></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS ------------------------------------------------------->
+<section class="section" style="background:var(--surface);">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="eyebrow">{% trans "Simple process" %}</span>
+      <h2 class="mt-2">{% trans "Find. Book. Get it done." %}</h2>
+      <p class="text-muted-2">{% trans "From search to a finished job in three easy steps." %}</p>
+    </div>
+    <div class="row g-5">
+      <div class="col-md-4 how-step reveal">
+        <div class="how-step__icon chip-navy"><i class="fa-solid fa-magnifying-glass"></i><span class="step-num">1</span></div>
+        <div class="how-step__connector"></div>
+        <h3 class="h5">{% trans "Find" %}</h3>
+        <p class="text-muted-2">{% trans "Search by service, location, price or rating to discover the right local professional." %}</p>
+      </div>
+      <div class="col-md-4 how-step reveal">
+        <div class="how-step__icon chip-green"><i class="fa-solid fa-calendar-check"></i><span class="step-num">2</span></div>
+        <div class="how-step__connector"></div>
+        <h3 class="h5">{% trans "Book" %}</h3>
+        <p class="text-muted-2">{% trans "Pick a date and time that works for you and send a booking request in seconds." %}</p>
+      </div>
+      <div class="col-md-4 how-step reveal">
+        <div class="how-step__icon chip-orange"><i class="fa-solid fa-shield-check"></i><span class="step-num">3</span></div>
+        <h3 class="h5">{% trans "Get It Done" %}</h3>
+        <p class="text-muted-2">{% trans "Your provider confirms, does the job, and you leave a review to help your community." %}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS ---------------------------------------------------------------->
+<section class="stats-band">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-6 col-md-3 stat-item reveal">
+        <div class="num">{{ stats.providers|intcomma }}+</div>
+        <div class="lbl">{% trans "Verified Providers" %}</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item reveal">
+        <div class="num">{{ stats.customers|intcomma }}+</div>
+        <div class="lbl">{% trans "Happy Customers" %}</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item reveal">
+        <div class="num">{{ stats.completed_bookings|intcomma }}+</div>
+        <div class="lbl">{% trans "Jobs Completed" %}</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item reveal">
+        <div class="num">{{ stats.categories }}+</div>
+        <div class="lbl">{% trans "Service Categories" %}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS ---------------------------------------------------------->
+{% if testimonials %}
+<section class="section">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="eyebrow">{% trans "Testimonials" %}</span>
+      <h2 class="mt-2">{% trans "Loved by customers &amp; providers alike" %}</h2>
+    </div>
+    <div class="row g-4">
+      {% for t in testimonials %}
+      <div class="col-lg-4 col-md-6 reveal">
+        <div class="testimonial-card">
+          <div class="quote-mark">&ldquo;</div>
+          <p class="quote">{{ t.quote }}</p>
+          {% include 'partials/stars.html' with rating=t.rating %}
+          <div class="testimonial-author">
+            <span class="avatar-circle">{{ t.author_name|initials }}</span>
+            <div>
+              <div class="name">{{ t.author_name }}</div>
+              <div class="role">{{ t.author_role }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- CTA -------------------------------------------------------------->
+<section class="section pt-0">
+  <div class="container">
+    <div class="cta-band reveal">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <h2 class="text-white mb-2">{% trans "Are you a skilled professional?" %}</h2>
+          <p class="mb-lg-0" style="color:rgba(255,255,255,0.85);">{% blocktrans %}Join {{ SITE_NAME }} to reach more local customers, manage bookings effortlessly, and grow your business.{% endblocktrans %}</p>
+        </div>
+        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+          <a href="{% url 'accounts:provider_register' %}" class="btn btn-lp-light btn-lg">{% trans "Join as a Provider" %} <i class="fa-solid fa-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

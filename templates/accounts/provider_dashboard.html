@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load lp_extras humanize i18n %}
+{% block title %}{% trans "Provider Dashboard" %} — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+{% if not provider %}
+<section class="section">
+  <div class="container">
+    <div class="lp-card p-5 text-center mx-auto" style="max-width:560px;">
+      <div class="category-card__icon chip-navy mx-auto" style="width:84px;height:84px;font-size:2rem;"><i class="fa-solid fa-briefcase"></i></div>
+      <h2 class="h4 mt-4 mb-2">Complete your provider listing</h2>
+      <p class="text-muted-2 mb-4">Add your service category, pricing, location, and availability so customers can find and book you.</p>
+      <a href="{% url 'services:provider_profile_edit' %}" class="btn btn-lp-primary btn-lg">Set Up My Listing <i class="fa-solid fa-arrow-right ms-1"></i></a>
+    </div>
+  </div>
+</section>
+{% else %}
+
+<section class="pt-4">
+  <div class="container">
+    <div class="dash-hero">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <span class="eyebrow on-dark">{% trans "Provider Dashboard" %}</span>
+          <h1 class="text-white mt-2 mb-1">{% trans "Welcome back," %} {{ user.first_name|default:user.username }}!</h1>
+          <p style="color:rgba(255,255,255,0.7);" class="mb-0">
+            {{ provider.category.name }} &middot; {{ provider.city }} &middot;
+            {% if provider.is_available %}<span style="color:#f3a463;"><i class="fa-solid fa-circle-check me-1"></i>Accepting bookings</span>{% else %}<span style="color:#f4c9a0;"><i class="fa-solid fa-circle-pause me-1"></i>Not accepting bookings</span>{% endif %}
+          </p>
+        </div>
+        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+          <a href="{% url 'services:provider_profile_edit' %}" class="btn btn-lp-light"><i class="fa-solid fa-pen me-1"></i> Edit My Listing</a>
+          <a href="{% url 'services:provider_detail' provider.pk %}" class="btn btn-lp-outline mt-2 mt-lg-0" style="border-color:rgba(255,255,255,0.4); color:#fff;"><i class="fa-solid fa-eye me-1"></i> View Public Page</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pb-5">
+  <div class="container">
+    <div class="row g-3 dash-stat-row mb-5">
+      <div class="col-6 col-lg-3">
+        <div class="dash-stat d-flex align-items-center gap-3">
+          <span class="icon-badge chip-gold"><i class="fa-solid fa-inbox"></i></span>
+          <div><div class="num">{{ pending_count }}</div><div class="lbl">New Requests</div></div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="dash-stat d-flex align-items-center gap-3">
+          <span class="icon-badge chip-blue"><i class="fa-solid fa-calendar-check"></i></span>
+          <div><div class="num">{{ accepted_count }}</div><div class="lbl">Upcoming</div></div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="dash-stat d-flex align-items-center gap-3">
+          <span class="icon-badge chip-green"><i class="fa-solid fa-indian-rupee-sign"></i></span>
+          <div><div class="num">&#8377;{{ earnings|floatformat:0|intcomma }}</div><div class="lbl">Earnings{% if pending_payout %} &middot; &#8377;{{ pending_payout|floatformat:0|intcomma }} pending{% endif %}</div></div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="dash-stat d-flex align-items-center gap-3">
+          <span class="icon-badge chip-navy"><i class="fa-solid fa-star"></i></span>
+          <div><div class="num">{{ average_rating|default:"—" }}</div><div class="lbl">Avg. Rating</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div class="dash-panel">
+          <div class="dash-panel__header">
+            <h2 class="h6 mb-0">{% trans "Booking Requests" %}</h2>
+            <span class="small text-muted-2">{{ total_bookings }} total</span>
+          </div>
+          {% for booking in bookings %}
+            <div class="booking-row">
+              <div class="row align-items-center g-3">
+                <div class="col-auto">
+                  <span class="avatar-circle prov-thumb" style="display:flex;">{{ booking.customer.get_full_name|default:booking.customer.username|initials }}</span>
+                </div>
+                <div class="col-12 col-md">
+                  <div class="fw-semibold">{{ booking.customer.get_full_name|default:booking.customer.username }}</div>
+                  <div class="small text-muted-2">{{ booking.service_date|date:"M d, Y" }} at {{ booking.service_time|time:"g:i A" }} &middot; {{ booking.address|truncatechars:40 }}</div>
+                </div>
+                <div class="col-auto"><span class="status-pill status-{{ booking.status }}">{{ booking.get_status_display }}</span></div>
+                <div class="col-auto d-flex gap-2">
+                  {% if booking.status == 'pending' %}
+                    <form method="post" action="{% url 'bookings:accept' booking.pk %}" class="d-inline">
+                      {% csrf_token %}<input type="hidden" name="next" value="dashboard">
+                      <button class="btn btn-lp-primary btn-sm-pill btn-sm" type="submit"><i class="fa-solid fa-check me-1"></i>Accept</button>
+                    </form>
+                    <button class="btn btn-lp-danger btn-sm-pill btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#rejectModal{{ booking.pk }}"><i class="fa-solid fa-xmark me-1"></i>Reject</button>
+                  {% elif booking.status == 'accepted' %}
+                    <form method="post" action="{% url 'bookings:complete' booking.pk %}" class="d-inline" data-confirm="Mark booking #{{ booking.pk }} as completed?">
+                      {% csrf_token %}<input type="hidden" name="next" value="dashboard">
+                      <button class="btn btn-lp-primary btn-sm-pill btn-sm" type="submit"><i class="fa-solid fa-flag-checkered me-1"></i>{% trans "Mark Complete" %}</button>
+                    </form>
+                  {% else %}
+                    <a href="{% url 'bookings:detail' booking.pk %}" class="btn btn-lp-outline btn-sm-pill btn-sm">{% trans "Details" %}</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            {% if booking.status == 'pending' %}
+            <div class="modal fade" id="rejectModal{{ booking.pk }}" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <form method="post" action="{% url 'bookings:reject' booking.pk %}">
+                    {% csrf_token %}<input type="hidden" name="next" value="dashboard">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Reject Booking #{{ booking.pk }}</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p class="text-muted-2 small">Let {{ booking.customer.first_name|default:booking.customer.username }} know why (optional):</p>
+                      <textarea name="reason" class="form-control" rows="3" placeholder="e.g. Fully booked on that date"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-lp-outline btn-sm-pill" data-bs-dismiss="modal">Cancel</button>
+                      <button type="submit" class="btn btn-lp-danger btn-sm-pill">{% trans "Reject Booking" %}</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          {% empty %}
+            <div class="empty-state">
+              <i class="fa-solid fa-inbox"></i>
+              <p class="mb-0">No booking requests yet. Once customers book you, they'll show up here.</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="dash-panel p-4 mb-4">
+          <h2 class="h6 mb-3">{% trans "Recent Reviews" %}</h2>
+          {% for review in recent_reviews %}
+            <div class="mb-3 pb-3 {% if not forloop.last %}border-bottom{% endif %}">
+              <div class="d-flex justify-content-between align-items-start">
+                <strong class="small">{{ review.customer.get_full_name|default:review.customer.username }}</strong>
+                {% include 'partials/stars.html' with rating=review.rating %}
+              </div>
+              {% if review.comment %}<p class="small text-muted-2 mb-0 mt-1">{{ review.comment|truncatewords:18 }}</p>{% endif %}
+            </div>
+          {% empty %}
+            <p class="small text-muted-2 mb-0">No reviews yet — complete your first job to get started!</p>
+          {% endfor %}
+        </div>
+        <div class="dash-panel p-4">
+          <h2 class="h6 mb-3">{% trans "Quick Actions" %}</h2>
+          <div class="d-grid gap-2">
+            <a href="{% url 'services:provider_profile_edit' %}" class="btn btn-lp-outline btn-sm text-start"><i class="fa-solid fa-sliders me-2"></i>Update Pricing & Availability</a>
+            <a href="{% url 'accounts:profile' %}" class="btn btn-lp-outline btn-sm text-start"><i class="fa-solid fa-user me-2"></i>{% trans "Edit Profile" %}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

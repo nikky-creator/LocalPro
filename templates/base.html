@@ -1,0 +1,43 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}{{ SITE_NAME }} — {{ SITE_TAGLINE }}{% endblock %}</title>
+<meta name="description" content="{% block meta_description %}Find trusted local electricians, plumbers, painters, cleaners, mechanics, tutors and more. Search, book, and get it done with verified service providers near you.{% endblock %}">
+<meta name="theme-color" content="#262422">
+
+<link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+<link rel="apple-touch-icon" href="{% static 'images/logo-192.png' %}">
+
+<link rel="stylesheet" href="{% static 'vendor/fonts.css' %}">
+<link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'vendor/fontawesome/css/all.min.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+<link rel="stylesheet" href="{% static 'css/components.css' %}">
+{% block extra_css %}{% endblock %}
+<script>
+  (function () {
+    var saved = localStorage.getItem('localpro-theme');
+    var theme = saved || 'light';
+    document.documentElement.setAttribute('data-bs-theme', theme);
+  })();
+</script>
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+{% include 'partials/navbar.html' %}
+{% include 'partials/toasts.html' %}
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+{% include 'partials/footer.html' %}
+
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

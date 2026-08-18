@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load lp_extras i18n %}
+{% block title %}Checkout — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<section class="page-header-band">
+  <div class="container">
+    <nav class="breadcrumb-lp small mb-2"><a href="{% url 'bookings:detail' booking.pk %}">Booking #{{ booking.pk }}</a> <span class="divider-dot mx-1">/</span> <span class="active">Checkout</span></nav>
+    <h1 class="h2 mb-0">Secure Checkout</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-4 order-lg-2">
+        <div class="dash-panel p-4" style="position:sticky; top:90px;">
+          <h2 class="h6 mb-3">Order Summary</h2>
+          <div class="d-flex align-items-center gap-3 mb-3 pb-3 border-bottom">
+            {% if booking.provider.photo %}<img src="{{ booking.provider.photo.url }}" style="width:52px;height:52px;border-radius:var(--r-md);object-fit:cover;" alt="">{% else %}<span class="avatar-circle" style="width:52px;height:52px;">{{ booking.provider.display_name|initials }}</span>{% endif %}
+            <div>
+              <div class="fw-semibold small">{{ booking.provider.display_name }}</div>
+              <div class="small text-muted-2">{{ booking.provider.category.name }} &middot; {{ booking.service_date|date:"M d, Y" }}</div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between small mb-2"><span class="text-muted-2">Service charge</span><span>&#8377;{{ booking.estimated_total|floatformat:0 }}</span></div>
+          <div class="d-flex justify-content-between small mb-3"><span class="text-muted-2">Platform fee</span><span>&#8377;0</span></div>
+          <hr>
+          <div class="d-flex justify-content-between"><strong>Total</strong><strong class="font-mono">&#8377;{{ booking.estimated_total|floatformat:0 }}</strong></div>
+          <div class="small text-muted-2 mt-3"><i class="fa-solid fa-lock me-1"></i> Simulated secure checkout — no real charge is made.</div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 order-lg-1">
+        <div class="lp-card p-4 p-md-5">
+          <div class="d-flex align-items-center gap-2 mb-4">
+            <span class="status-pill status-accepted"><i class="fa-solid fa-shield-halved"></i>&nbsp;Test Mode</span>
+            <span class="small text-muted-2">This is a simulated gateway for demo purposes.</span>
+          </div>
+
+          <form method="post" novalidate id="paymentForm">
+            {% csrf_token %}
+            <label class="form-label d-block mb-2">Payment Method</label>
+            <div class="row g-2 mb-4">
+            {% for radio in form.method %}
+              <div class="col-4">
+                {{ radio.tag }}
+                <label class="btn btn-lp-outline w-100 btn-sm" for="{{ radio.id_for_label }}">
+                  {% if radio.data.value == 'card' %}<i class="fa-solid fa-credit-card d-block mb-1"></i>Card
+                  {% elif radio.data.value == 'upi' %}<i class="fa-solid fa-mobile-screen d-block mb-1"></i>UPI
+                  {% else %}<i class="fa-solid fa-building-columns d-block mb-1"></i>Net Banking{% endif %}
+                </label>
+              </div>
+              {% endfor %}
+            </div>
+            {% for error in form.method.errors %}<div class="text-danger small mt-1 mb-3">{{ error }}</div>{% endfor %}
+
+            <div id="cardFields">
+              <div class="row g-3">
+                <div class="col-12">
+                  <label class="form-label">Card Number</label>
+                  {{ form.card_number }}
+                  {% for error in form.card_number.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Name on Card</label>
+                  {{ form.card_name }}
+                  {% for error in form.card_name.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+                </div>
+                <div class="col-6">
+                  <label class="form-label">Expiry</label>
+                  {{ form.card_expiry }}
+                  {% for error in form.card_expiry.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+                </div>
+                <div class="col-6">
+                  <label class="form-label">CVV</label>
+                  {{ form.card_cvv }}
+                  {% for error in form.card_cvv.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+                </div>
+              </div>
+            </div>
+
+            <div id="upiFields" style="display:none;">
+              <label class="form-label">UPI ID</label>
+              {{ form.upi_id }}
+              {% for error in form.upi_id.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+            </div>
+
+            <div id="netbankingFields" style="display:none;">
+              <label class="form-label">Select Bank</label>
+              <select class="form-select">
+                <option>State Bank of India</option>
+                <option>HDFC Bank</option>
+                <option>ICICI Bank</option>
+                <option>Axis Bank</option>
+                <option>Punjab National Bank</option>
+              </select>
+              <div class="form-text">You'll be redirected to your bank's login in a real integration.</div>
+            </div>
+
+            <button type="submit" class="btn btn-lp-primary btn-lg w-100 mt-4"><i class="fa-solid fa-lock me-1"></i> {% trans "Pay" %}&#8377;{{ booking.estimated_total|floatformat:0 }}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  var methodInputs = document.querySelectorAll('input[name="method"]');
+  var panels = { card: document.getElementById('cardFields'), upi: document.getElementById('upiFields'), netbanking: document.getElementById('netbankingFields') };
+  function updatePanels() {
+    var selected = document.querySelector('input[name="method"]:checked');
+    var val = selected ? selected.value : 'card';
+    Object.keys(panels).forEach(function (k) { panels[k].style.display = (k === val) ? 'block' : 'none'; });
+  }
+  methodInputs.forEach(function (el) { el.addEventListener('change', updatePanels); });
+  updatePanels();
+
+  var cardNumber = document.getElementById('{{ form.card_number.id_for_label }}');
+  if (cardNumber) {
+    cardNumber.addEventListener('input', function () {
+      var digits = this.value.replace(/\D/g, '').slice(0, 19);
+      this.value = digits.replace(/(.{4})/g, '$1 ').trim();
+    });
+  }
+  var expiry = document.getElementById('{{ form.card_expiry.id_for_label }}');
+  if (expiry) {
+    expiry.addEventListener('input', function () {
+      var digits = this.value.replace(/\D/g, '').slice(0, 4);
+      this.value = digits.length > 2 ? digits.slice(0, 2) + '/' + digits.slice(2) : digits;
+    });
+  }
+  var cvv = document.getElementById('{{ form.card_cvv.id_for_label }}');
+  if (cvv) {
+    cvv.addEventListener('input', function () { this.value = this.value.replace(/\D/g, '').slice(0, 4); });
+  }
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load lp_extras humanize i18n %}
+{% block title %}{{ provider.display_name }} — {{ provider.category.name }} in {{ provider.city }} | {{ SITE_NAME }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>#providerMap { height: 200px; border-radius: var(--r-md); z-index: 1; }</style>
+{% endblock %}
+
+{% block content %}
+<section class="pt-4">
+  <div class="container">
+    <nav class="breadcrumb-lp small mb-3">
+      <a href="{% url 'core:home' %}">Home</a> <span class="divider-dot mx-1">/</span>
+      <a href="{% url 'services:provider_list' %}">Providers</a> <span class="divider-dot mx-1">/</span>
+      <span class="active">{{ provider.display_name }}</span>
+    </nav>
+
+    <div class="provider-hero">
+      <div class="row align-items-center g-4">
+        <div class="col-auto">
+          {% if provider.photo %}
+            <img src="{{ provider.photo.url }}" alt="{{ provider.display_name }}" class="provider-hero__photo">
+          {% else %}
+            <div class="provider-hero__photo d-flex align-items-center justify-content-center" style="background:rgba(255,255,255,0.1); font-family:var(--font-display); font-size:2.4rem; font-weight:700;">{{ provider.display_name|initials }}</div>
+          {% endif %}
+        </div>
+        <div class="col">
+          <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+            <span class="status-pill" style="background:rgba(255,255,255,0.12); color:#fff; border-color:rgba(255,255,255,0.25);"><i class="{{ provider.category.icon }} me-1"></i>{{ provider.category.name }}</span>
+            {% if provider.is_verified %}<span class="status-pill status-completed"><i class="fa-solid fa-shield-check"></i>&nbsp;Verified</span>{% endif %}
+            {% if not provider.is_available %}<span class="status-pill status-rejected">Not accepting bookings</span>{% endif %}
+          </div>
+          <h1 class="text-white h2 mb-2">{{ provider.display_name }}</h1>
+          <div class="d-flex flex-wrap align-items-center gap-3" style="color:rgba(255,255,255,0.8);">
+            <span>{% include 'partials/stars.html' with rating=provider.average_rating %} <strong class="text-white ms-1">{{ provider.average_rating }}</strong> ({{ provider.review_count }} review{{ provider.review_count|pluralize }})</span>
+            <span><i class="fa-solid fa-location-dot me-1"></i>{{ provider.location }}, {{ provider.city }}</span>
+            <span><i class="fa-solid fa-briefcase me-1"></i>{{ provider.experience_years }} yr{{ provider.experience_years|pluralize }} experience</span>
+          </div>
+        </div>
+        <div class="col-12 col-lg-auto text-center">
+          <div class="font-mono text-white mb-2" style="font-size:1.9rem; font-weight:700;">&#8377;{{ provider.price_per_hour|floatformat:0|intcomma }}<small style="font-size:1rem; font-weight:400; color:rgba(255,255,255,0.7);">/hr</small></div>
+          {% if provider.is_available %}
+            <a href="{% url 'bookings:create' provider.pk %}" class="btn btn-lp-primary btn-lg w-100"><i class="fa-solid fa-calendar-check me-1"></i> {% trans "Book Now" %}</a>
+            {% if already_booked_pending %}<div class="small mt-2" style="color:#f4c9a0;">You already have an active booking with this provider.</div>{% endif %}
+          {% else %}
+            <button class="btn btn-lp-outline btn-lg w-100" disabled style="border-color:rgba(255,255,255,0.3); color:rgba(255,255,255,0.6);">Not Available</button>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div class="lp-card p-4 p-md-5 mb-4">
+          <h2 class="h5 mb-3">About {{ provider.display_name }}</h2>
+          {% if provider.bio %}<p class="text-muted-2">{{ provider.bio|linebreaks }}</p>{% else %}<p class="text-muted-2 fst-italic">This provider hasn't added a bio yet.</p>{% endif %}
+          <div class="row g-3 mt-2">
+            <div class="col-6 col-md-3">
+              <div class="small text-muted-2">Experience</div>
+              <div class="fw-semibold">{{ provider.experience_years }} years</div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="small text-muted-2">Jobs Completed</div>
+              <div class="fw-semibold">{{ provider.completed_jobs }}</div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="small text-muted-2">Rate</div>
+              <div class="fw-semibold">&#8377;{{ provider.price_per_hour|floatformat:0 }}/hr</div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="small text-muted-2">Available Days</div>
+              <div class="fw-semibold">{{ provider.availability_day_list|join:", " }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-card p-4 p-md-5">
+          <div class="d-flex justify-content-between align-items-start mb-4 flex-wrap gap-3">
+            <div>
+              <h2 class="h5 mb-1">Customer Reviews</h2>
+              <span class="text-muted-2 small">{{ provider.review_count }} review{{ provider.review_count|pluralize }} &middot; {{ provider.average_rating }} average</span>
+            </div>
+            <div style="min-width:220px;">
+              {% with breakdown=provider.rating_breakdown %}
+              {% for star in "54321" %}
+                <div class="d-flex align-items-center gap-2 mb-1">
+                  <span class="small text-muted-2" style="width:14px;">{{ star }}</span>
+                  <i class="fa-solid fa-star" style="color:var(--gold); font-size:.7rem;"></i>
+                  <div class="rating-bar-track"><div class="rating-bar-fill" style="width:{% widthratio breakdown|get_item:star provider.review_count 100 %}%;"></div></div>
+                </div>
+              {% endfor %}
+              {% endwith %}
+            </div>
+          </div>
+
+          {% for review in reviews %}
+          <div class="review-item">
+            <div class="d-flex justify-content-between align-items-start">
+              <div class="d-flex gap-3">
+                <span class="avatar-circle" style="width:44px;height:44px;">{{ review.customer.get_full_name|default:review.customer.username|initials }}</span>
+                <div>
+                  <div class="fw-semibold">{{ review.customer.get_full_name|default:review.customer.username }}</div>
+                  {% include 'partials/stars.html' with rating=review.rating %}
+                </div>
+              </div>
+              <span class="small text-muted-2">{{ review.created_at|naturaltime }}</span>
+            </div>
+            {% if review.comment %}<p class="text-muted-2 mt-2 mb-0">{{ review.comment }}</p>{% endif %}
+          </div>
+          {% empty %}
+          <div class="empty-state py-4"><i class="fa-solid fa-star"></i><p class="mb-0">No reviews yet. Be the first to book and review!</p></div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="dash-panel p-4 mb-4" style="position:sticky; top:90px;">
+          <h2 class="h6 mb-3">Availability</h2>
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            {% for day in provider.availability_day_list %}<span class="status-pill status-accepted">{{ day }}</span>{% endfor %}
+          </div>
+          <div class="small text-muted-2 mb-3"><i class="fa-solid fa-clock me-1"></i>{{ provider.availability_start|time:"g:i A" }} – {{ provider.availability_end|time:"g:i A" }}</div>
+          {% if provider.is_available %}
+            <a href="{% url 'bookings:create' provider.pk %}" class="btn btn-lp-primary w-100"><i class="fa-solid fa-calendar-check me-1"></i> Book This Provider</a>
+          {% endif %}
+          <hr>
+          <h2 class="h6 mb-2"><i class="fa-solid fa-location-dot me-1" style="color:var(--green);"></i> Location</h2>
+          <div id="providerMap"></div>
+          <div class="small text-muted-2 mt-2">{{ provider.location }}, {{ provider.city }}</div>
+        </div>
+
+        {% if similar_providers %}
+        <div class="dash-panel p-4">
+          <h2 class="h6 mb-3">Similar Providers</h2>
+          {% for sp in similar_providers %}
+          <a href="{% url 'services:provider_detail' sp.pk %}" class="d-flex align-items-center gap-3 mb-3 text-decoration-none text-reset shadow-hover p-2 rounded-3">
+            {% if sp.photo %}<img src="{{ sp.photo.url }}" class="prov-thumb" alt="">{% else %}<span class="avatar-circle prov-thumb" style="display:flex;">{{ sp.display_name|initials }}</span>{% endif %}
+            <div>
+              <div class="small fw-semibold">{{ sp.display_name }}</div>
+              <div class="small text-muted-2">&#8377;{{ sp.price_per_hour|floatformat:0 }}/hr &middot; {{ sp.average_rating|default:"New" }}{% if sp.average_rating %}★{% endif %}</div>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+(function () {
+  var lat = {{ provider_lat }}, lng = {{ provider_lng }};
+  var map = L.map('providerMap', { zoomControl: false, dragging: false, scrollWheelZoom: false }).setView([lat, lng], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    maxZoom: 18
+  }).addTo(map);
+  var icon = L.divIcon({
+    className: '', html: '<div style="background:var(--green);width:16px;height:16px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px var(--green);"></div>',
+    iconSize: [16, 16]
+  });
+  L.marker([lat, lng], { icon: icon }).addTo(map);
+})();
+</script>
+{% endblock %}
